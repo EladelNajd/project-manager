@@ -1,0 +1,79 @@
+Project evolteam {
+  database_type: "PostgreSQL"
+}
+
+Table User {
+  id int [pk, increment]
+  name varchar
+  email varchar [unique]
+  role varchar
+  team_id int [ref: > Team.id, note: 'nullable'] // User may not belong to a team initially
+  points int
+  profile_info text
+}
+
+Table Team {
+  id int [pk, increment]
+  name varchar
+  lead_id int [ref: > User.id, note: 'nullable'] // Lead can be assigned later
+}
+
+Table Project {
+  id int [pk, increment]
+  title varchar
+  description text
+  team_id int [ref: > Team.id] // Required
+}
+
+Table Task {
+  id int [pk, increment]
+  title varchar
+  status varchar
+  assigned_to int [ref: > User.id] // Required
+  project_id int [ref: > Project.id] // Required
+}
+
+Table Skill {
+  id int [pk, increment]
+  name varchar
+}
+
+Table SkillUpdateRequest {
+  id int [pk, increment]
+  user_id int [ref: > User.id] // Required
+  skill_id int [ref: > Skill.id] // Required
+  status varchar
+  reviewed_by int [ref: > User.id, note: 'nullable'] // Review may not be assigned yet
+  points_awarded int
+}
+
+Table Review {
+  id int [pk, increment]
+  user_id int [ref: > User.id] // Person being reviewed
+  reviewer_id int [ref: > User.id] // Reviewer
+  content text
+  date datetime
+}
+
+Table PointHistory {
+  id int [pk, increment]
+  user_id int [ref: > User.id] // Who receives the points
+  points int
+  reason varchar
+  date datetime
+  given_by int [ref: > User.id] // Who gave the points
+}
+
+Table TeamHistory {
+  id int [pk, increment]
+  team_id int [ref: > Team.id] // Required
+  change_description text
+  date datetime
+}
+
+Table ProjectHistory {
+  id int [pk, increment]
+  project_id int [ref: > Project.id] // Required
+  change_description text
+  date datetime
+}
