@@ -1,0 +1,129 @@
+<!-- Add this background container right after app-navbar -->
+<div class="tessi-animated-background">
+  <!-- Oblique floating elements -->
+  <div class="oblique-element"></div>
+  <div class="oblique-element"></div>
+  <div class="oblique-element"></div>
+  <div class="oblique-element"></div>
+  <div class="oblique-element"></div>
+  
+  <!-- Floating particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<app-navbar></app-navbar>
+
+<div class="video-container">
+  <video autoplay muted loop playsinline class="background-video">
+    <source src="assets/HEADER_VIDEO_TESSI.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Overlay Content -->
+  <div class="overlay-content">
+    <h2>Business Process Services in a Digital World</h2>
+    
+    <!-- Animated Button -->
+    <button type="button" class="btn-new btn-arrow btn-white-rounded home-search">
+      <span class="text"><span class="text-degrade">Laissez-vous guider</span></span>
+      <span class="icon">
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7678 3.58582L10.2323 0.050293L8.81809 1.46451L11.4039 4.05029H1.81812L0.818115 6.05029H11.3033L8.81812 8.53552L10.2323 9.94974L13.7678 6.41424L13.7678 6.41425L15.182 5.00004L15.182 5.00003L15.1821 4.99999L13.7679 3.58578L13.7678 3.58582Z" fill="url(#6889e31a1bc2c)"></path>
+          <defs>
+            <linearGradient id="6889e31a1bc2c" x1="0.818115" y1="8.98465" x2="13.4244" y2="-1.57823" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0069B0"></stop>
+              <stop offset="0.230853" stop-color="#007ABE"></stop>
+              <stop offset="0.447977" stop-color="#8E559F"></stop>
+              <stop offset="0.717892" stop-color="#EE5D84"></stop>
+              <stop offset="1" stop-color="#F2868F"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+
+<!-- ✅ Toast component to show success/error messages -->
+<p-toast></p-toast>
+<router-outlet></router-outlet>
+
+<section id="about-section">
+  <div class="about-container">
+    <!-- Oblique accent element -->
+    <div class="oblique-accent"></div>
+   
+    <h1>About EvoluTeam</h1>
+    <p class="intro-text">
+      EvoluTeam is a web platform dedicated to tracking and boosting the evolution of team members' skills. We provide smart dashboards, skill tracking, request workflows, and point-based performance evaluation for teams.
+    </p>
+    
+    <div class="about-grid">
+      <div class="content-block">
+        <div class="section-header">
+          <div class="header-oblique"></div>
+          <h2>Our Mission</h2>
+        </div>
+        <p>
+          Help teams grow together by identifying skill gaps, rewarding progress, and building transparency in professional development.
+        </p>
+       
+        <!-- Tessi-style feature highlights -->
+        <div class="feature-highlights">
+          <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <span>Smart Analytics</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <span>Skill Tracking</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🏆</div>
+            <span>Performance Rewards</span>
+          </div>
+        </div>
+      </div>
+     
+      <div class="image-block">
+        <div class="image-container">
+          <img src="assets/images/about-team.jpg" alt="Team collaboration" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional Tessi-branded section -->
+    <div class="values-section">
+      <div class="values-header">
+        <h3>Powered by Innovation</h3>
+        <div class="values-oblique"></div>
+      </div>
+      <div class="values-grid">
+        <div class="value-item">
+          <h4>Transparency</h4>
+          <p>Clear visibility into team performance and growth opportunities.</p>
+        </div>
+        <div class="value-item">
+          <h4>Growth</h4>
+          <p>Continuous learning and skill development for every team member.</p>
+        </div>
+        <div class="value-item">
+          <h4>Collaboration</h4>
+          <p>Building stronger teams through shared goals and achievements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

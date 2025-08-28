@@ -1,0 +1,725 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+$secondary-teal: #008faa;
+$secondary-blue: #0072bb;
+$secondary-purple: #954b97;
+$secondary-rose: #ea527e;
+$secondary-salmon: #f08590;
+
+$dark-mode-title-text: #e0e0e0;
+$dark-mode-body-text: #a0a09f;
+$dark-mode-disabled-text: #6d6d6d;
+
+$alert-success: #6eb563;
+$alert-warning: #fcbc0e;
+$alert-error: #d61b3c;
+
+$background-tessi-blue: #1a214d;
+$background-light-grey: #f2f2f2;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+$border-radius-sm: 0.375rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-2xl: 1.5rem;
+
+@mixin tessi-gradient-bg {
+  background: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $salmon 100%);
+}
+
+:host ::ng-deep {
+  /* === PROJECT FORM CONTAINER === */
+  .project-form-container {
+    min-height: 100vh;
+    background: $background-light-grey;
+    padding: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      @include tessi-gradient-bg;
+      opacity: 0.15;
+      transform: skewX(-33deg);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    &::before {
+      width: 300px;
+      height: 6px;
+      top: 5%;
+      left: -10%;
+      animation: floatOblique1 20s linear infinite;
+    }
+
+    &::after {
+      width: 200px;
+      height: 4px;
+      bottom: 10%;
+      right: -5%;
+      animation: floatOblique2 25s linear infinite reverse;
+    }
+  }
+
+  /* === FORM HEADER === */
+  .form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+
+    h2 {
+      color: $tessi-blue;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: relative;
+
+      &::before {
+        content: '🚀';
+        font-size: 2.2rem;
+        animation: bounce 2s infinite;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        @include tessi-gradient-bg;
+        border-radius: 2px;
+        transform: translateX(-50%) scaleX(0);
+        animation: slideIn 1s ease forwards 0.5s;
+      }
+    }
+
+    .form-subtitle {
+      color: $dark-mode-body-text;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  /* === FORM STYLING === */
+  form {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: $border-radius-2xl;
+    padding: 3rem;
+    box-shadow: $shadow-xl;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: $tessi-blue;
+    position: relative;
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      @include tessi-gradient-bg;
+      background-size: 200% 100%;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    &::after {
+      content: '📝';
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 2rem;
+      opacity: 0.3;
+      animation: pulse 3s infinite;
+    }
+  }
+
+  /* === FORM FIELDS === */
+  .mb-3 {
+    margin-bottom: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* === LABELS === */
+  .form-label {
+    font-weight: 700;
+    color: $tessi-blue;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+
+    &::before {
+      font-size: 1rem;
+      color: $light-blue;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* === LABEL ICONS === */
+  label[for="title"]::before {
+    content: '📋';
+    font-family: inherit;
+  }
+
+  label[for="description"]::before {
+    content: '📝';
+    font-family: inherit;
+  }
+
+  label[for="teamId"]::before {
+    content: '👥';
+    font-family: inherit;
+  }
+
+  /* === INPUT STYLING === */
+  .form-control {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba($light-blue, 0.2);
+    border-radius: $border-radius-lg;
+    color: $tessi-blue;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-sm;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+
+    &:focus {
+      border-color: $light-blue;
+      box-shadow: 0 0 0 4px rgba($light-blue, 0.15), $shadow-md;
+      outline: none;
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+    }
+
+    &:hover {
+      border-color: rgba($light-blue, 0.4);
+      box-shadow: $shadow-md;
+      transform: translateY(-1px);
+    }
+
+    &.ng-invalid.ng-touched {
+      border-color: $alert-error;
+      background: linear-gradient(135deg, rgba(254, 242, 242, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+      animation: shake 0.5s ease-in-out;
+    }
+
+    &::placeholder {
+      color: rgba($tessi-blue, 0.6);
+      font-style: italic;
+    }
+  }
+
+  /* === TEXTAREA SPECIFIC === */
+  textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  /* === SELECT STYLING === */
+  .form-select {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba($light-blue, 0.2);
+    border-radius: $border-radius-lg;
+    color: $tessi-blue;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-sm;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    min-height: 3.5rem;
+
+    &:focus {
+      border-color: $light-blue;
+      box-shadow: 0 0 0 4px rgba($light-blue, 0.15), $shadow-md;
+      outline: none;
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+    }
+
+    &:hover {
+      border-color: rgba($light-blue, 0.4);
+      box-shadow: $shadow-md;
+      transform: translateY(-1px);
+    }
+
+    &.ng-invalid.ng-touched {
+      border-color: $alert-error;
+      background: linear-gradient(135deg, rgba(254, 242, 242, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+      animation: shake 0.5s ease-in-out;
+    }
+
+    option {
+      padding: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: $tessi-blue;
+    }
+  }
+
+  /* === VALIDATION ERRORS === */
+  .form-error {
+    color: $alert-error;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    animation: fadeInError 0.3s ease-in-out;
+
+    &::before {
+      content: '⚠️';
+      font-size: 0.9rem;
+    }
+  }
+
+  /* === BUTTON STYLING === */
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: $border-radius-xl;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-lg;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    min-width: 180px;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    margin-top: 2rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.01);
+    }
+  }
+
+  /* === PRIMARY BUTTON === */
+  .btn-primary {
+    @include tessi-gradient-bg;
+    color: white;
+    background-size: 200% 100%;
+
+    &::after {
+      content: '💾';
+      position: absolute;
+      right: 0.75rem;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &:hover {
+      background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue);
+      box-shadow: 0 12px 40px rgba($rose, 0.4);
+    }
+
+    &:disabled {
+      background: linear-gradient(135deg, $dark-mode-disabled-text 0%, lighten($dark-mode-disabled-text, 10%) 100%);
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      color: white;
+
+      &:hover {
+        transform: none;
+        box-shadow: $shadow-lg;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  /* === FORM ACTIONS === */
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba($tessi-blue, 0.1);
+  }
+
+  /* === SECONDARY BUTTON === */
+  .btn-secondary {
+    background: rgba($tessi-blue, 0.1);
+    border: 2px solid rgba($tessi-blue, 0.2);
+    color: $tessi-blue;
+
+    &:hover {
+      background: rgba($tessi-blue, 0.15);
+      border-color: rgba($tessi-blue, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba($tessi-blue, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  /* === LOADING STATE === */
+  .btn-loading {
+    position: relative;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      margin: auto;
+      border: 2px solid transparent;
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .btn-text {
+      opacity: 0;
+    }
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes floatOblique1 {
+    0% {
+      transform: translateX(-100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes floatOblique2 {
+    0% {
+      transform: translateX(100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(-100vw - 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+
+  @keyframes fadeInError {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* === RESPONSIVE DESIGN === */
+  @media (max-width: 1200px) {
+    .project-form-container {
+      padding: 1.5rem;
+    }
+
+    form {
+      padding: 2.5rem;
+    }
+
+    .form-header h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-form-container {
+      padding: 1rem;
+    }
+
+    form {
+      padding: 2rem;
+    }
+
+    .form-header {
+      margin-bottom: 2rem;
+
+      h2 {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &::before {
+          font-size: 1.8rem;
+        }
+      }
+
+      .form-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    .mb-3 {
+      margin-bottom: 1.5rem;
+
+      &:hover {
+        transform: none;
+      }
+    }
+
+    .form-control,
+    .form-select {
+      padding: 0.875rem 1rem;
+      font-size: 0.9rem;
+
+      &:hover {
+        transform: none;
+      }
+
+      &:focus {
+        transform: none;
+      }
+    }
+
+    .btn {
+      width: 100%;
+      min-width: auto;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .form-actions {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-form-container {
+      padding: 0.5rem;
+    }
+
+    form {
+      padding: 1.5rem;
+      border-radius: $border-radius-xl;
+    }
+
+    .form-header h2 {
+      font-size: 1.6rem;
+
+      &::before {
+        font-size: 1.5rem;
+      }
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      gap: 0.5rem;
+
+      &::before {
+        font-size: 0.9rem;
+      }
+    }
+
+    .form-control,
+    .form-select {
+      padding: 0.75rem 0.875rem;
+      font-size: 0.85rem;
+    }
+
+    .btn {
+      padding: 0.875rem 1.25rem;
+      font-size: 0.85rem;
+    }
+
+    .form-error {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* === ACCESSIBILITY === */
+  .form-control:focus-visible,
+  .form-select:focus-visible,
+  .btn:focus-visible {
+    outline: 3px solid $light-blue;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* === DARK MODE SUPPORT === */
+  @media (prefers-color-scheme: dark) {
+    .project-form-container {
+      background: darken($background-tessi-blue, 5%);
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-control,
+    .form-select {
+      background: rgba(255, 255, 255, 0.05);
+      color: $dark-mode-title-text;
+      border-color: rgba(255, 255, 255, 0.2);
+
+      &::placeholder {
+        color: $dark-mode-body-text;
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.1);
+        color: $dark-mode-title-text;
+      }
+    }
+
+    .form-label {
+      color: $dark-mode-title-text;
+    }
+
+    .form-header .form-subtitle {
+      color: $dark-mode-body-text;
+    }
+  }
+}

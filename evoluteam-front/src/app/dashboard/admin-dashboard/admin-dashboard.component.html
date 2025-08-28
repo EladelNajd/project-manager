@@ -1,0 +1,292 @@
+<div class="dashboard-container">
+  <h2>🔧 Admin Dashboard</h2>
+
+  <!-- Management Actions Section -->
+  <section class="dashboard-actions">
+    <div class="action-grid">
+      <!-- User & Team Management -->
+      <div class="action-group">
+        <h3>👥 User & Team Management</h3>
+        <div class="button-row">
+          <button class="btn btn-primary" (click)="navigateToUsers()">
+            <i class="pi pi-users"></i> Manage Users
+          </button>
+          <button class="btn btn-info" (click)="navigateToTeams()">
+            <i class="pi pi-sitemap"></i> Manage Teams
+          </button>
+          <button class="btn btn-warning" (click)="navigateToTeamHistory()">
+            <i class="pi pi-history"></i> Team History
+          </button>
+        </div>
+      </div>
+
+      <!-- Project & Task Management -->
+      <div class="action-group">
+        <h3>📋 Project & Task Management</h3>
+        <div class="button-row">
+          <button class="btn btn-secondary" (click)="navigateToProjectManager()">
+            <i class="pi pi-folder"></i> Manage Projects
+          </button>
+          <button class="btn btn-dark" (click)="navigateToProjectHistory()">
+            <i class="pi pi-clock"></i> Project History
+          </button>
+          <button class="btn btn-outline-primary" (click)="navigateToTasks()">
+            <i class="pi pi-check-square"></i> Manage Tasks
+          </button>
+        </div>
+      </div>
+
+      <!-- Skills & Reviews -->
+      <div class="action-group">
+        <h3>⭐ Skills & Reviews</h3>
+        <div class="button-row">
+          <button class="btn btn-primary" (click)="navigateToSkills()">
+            <i class="pi pi-star"></i> Manage Skills
+          </button>
+          <button class="btn btn-secondary" (click)="navigateToSkillRequests()">
+            <i class="pi pi-send"></i> Skill Update Requests
+          </button>
+          <button class="btn btn-danger" (click)="navigateToReviews()">
+            <i class="pi pi-comment"></i> Manage Reviews
+          </button>
+        </div>
+      </div>
+
+      <!-- Points Management -->
+      <div class="action-group">
+        <h3>🏆 Points Management</h3>
+        <div class="button-row">
+          <button class="btn btn-success" (click)="navigateToPoints()">
+            <i class="pi pi-trophy"></i> Manage Points
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics & Analytics Section -->
+  <section class="dashboard-stats card shadow rounded">
+    <h4>📊 System Analytics & Statistics</h4>
+    
+    <!-- Key Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-category">
+        <h5>👥 User Metrics</h5>
+        <ul class="list-unstyled">
+          <li><strong>Total Users:</strong> <span class="metric-value">{{ totalUsers }}</span></li>
+          <li><strong>Top Performing User:</strong> <span class="metric-value highlight">{{ topUser }}</span></li>
+          <li><strong>Avg Points / User:</strong> <span class="metric-value">{{ averagePointsPerUser }}</span></li>
+        </ul>
+      </div>
+
+      <div class="metric-category">
+        <h5>🏢 Team Metrics</h5>
+        <ul class="list-unstyled">
+          <li><strong>Total Teams:</strong> <span class="metric-value">{{ totalTeams }}</span></li>
+          <li><strong>Top Performing Team:</strong> <span class="metric-value highlight">{{ topTeam }}</span></li>
+        </ul>
+      </div>
+
+      <div class="metric-category">
+        <h5>📋 Project Metrics</h5>
+        <ul class="list-unstyled">
+          <li><strong>Total Projects:</strong> <span class="metric-value">{{ totalProjects }}</span></li>
+          <li><strong>Total Tasks:</strong> <span class="metric-value">{{ totalTasks }}</span></li>
+          <li><strong>Tasks Pending:</strong> <span class="metric-value pending">{{ tasksPending }}</span></li>
+          <li><strong>Tasks In Progress:</strong> <span class="metric-value progress">{{ tasksInProgress }}</span></li>
+          <li><strong>Tasks Finished:</strong> <span class="metric-value success">{{ tasksFinished }}</span></li>
+        </ul>
+      </div>
+
+      <div class="metric-category">
+        <h5>⭐ Skills & Reviews</h5>
+        <ul class="list-unstyled">
+          <li><strong>Total Skills:</strong> <span class="metric-value">{{ totalSkills }}</span></li>
+          <li><strong>Pending Skill Requests:</strong> <span class="metric-value warning">{{ pendingRequests }}</span></li>
+          <li><strong>Total Reviews:</strong> <span class="metric-value">{{ totalReviews }}</span></li>
+        </ul>
+      </div>
+
+      <div class="metric-category">
+        <h5>🏆 Points System</h5>
+        <ul class="list-unstyled">
+          <li><strong>Point Transactions:</strong> <span class="metric-value">{{ totalPointTransactions }}</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <h5>📈 Data Visualization</h5>
+      <div class="chart-controls">
+        <!-- Row 1: Status & Distribution Charts -->
+        <div class="chart-row">
+          <button class="btn btn-info" (click)="toggleTaskStatusChart()">
+            <i class="pi pi-chart-pie"></i>
+            {{ showTaskStatusChart ? 'Hide' : 'Show' }} Task Status Chart
+          </button>
+          
+          <button class="btn btn-danger" (click)="toggleTaskPriorityPolarChart()">
+            <i class="pi pi-chart-bar"></i>
+            {{ showTaskPriorityPolarChart ? 'Hide' : 'Show' }} Task Priority Distribution
+          </button>
+        </div>
+
+        <!-- Row 2: Project Analysis Charts -->
+        <div class="chart-row">
+          <button class="btn btn-primary" (click)="toggleTasksPerProjectChart()">
+            <i class="pi pi-chart-line"></i>
+            {{ showTasksPerProjectChart ? 'Hide' : 'Show' }} Tasks Per Project
+          </button>
+          
+          <button class="btn btn-secondary" (click)="toggleTaskStatusPerProjectChart()">
+            <i class="pi pi-chart-bar"></i>
+            {{ showTaskStatusPerProjectChart ? 'Hide' : 'Show' }} Task Status Per Project
+          </button>
+        </div>
+
+        <!-- Row 3: Timeline & Skills Charts -->
+        <div class="chart-row">
+          <button class="btn btn-success" (click)="toggleTaskCompletionChart()">
+            <i class="pi pi-chart-line"></i>
+            {{ showTaskCompletionChart ? 'Hide' : 'Show' }} Task Completion Timeline
+          </button>
+          
+          <button class="btn btn-warning" (click)="toggleUserSkillBarChart()">
+            <i class="pi pi-star"></i>
+            {{ showUserSkillBarChart ? 'Hide' : 'Show' }} User Skill Levels
+          </button>
+        </div>
+
+        <!-- Row 4: Custom Charts -->
+        <div class="chart-row">
+          <button class="btn btn-outline-success" (click)="toggleNewCustomChart()">
+            <i class="pi pi-chart-scatter"></i>
+            {{ showNewCustomChart ? 'Hide' : 'Show' }} Custom Analytics
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Modals (keeping your existing modal structure) -->
+    
+    <!-- Task Status Doughnut Chart -->
+    <div *ngIf="showTaskStatusChart" class="chart-popup-overlay" (click)="toggleTaskStatusChart()">
+      <div class="chart-popup chart-popup-medium" (click)="$event.stopPropagation()">
+        <h5>🟢 Task Status Distribution</h5>
+        <canvas
+          baseChart
+          [data]="taskStatusChartData"
+          [type]="'doughnut'"
+          [options]="taskStatusChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleTaskStatusChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Tasks Per Project Bar Chart -->
+    <div *ngIf="showTasksPerProjectChart" class="chart-popup-overlay" (click)="toggleTasksPerProjectChart()">
+      <div class="chart-popup chart-popup-large" (click)="$event.stopPropagation()">
+        <h5>📊 Tasks Per Project</h5>
+        <canvas
+          baseChart
+          [data]="tasksPerProjectChartData"
+          [type]="'bar'"
+          [options]="tasksPerProjectChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleTasksPerProjectChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Task Completion Over Time Line Chart -->
+    <div *ngIf="showTaskCompletionChart" class="chart-popup-overlay" (click)="toggleTaskCompletionChart()">
+      <div class="chart-popup chart-popup-large" (click)="$event.stopPropagation()">
+        <h5>📈 Task Completion Over Time</h5>
+        <canvas
+          baseChart
+          [data]="taskCompletionChartData"
+          [type]="'line'"
+          [options]="taskCompletionChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleTaskCompletionChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- User Skill Levels Bar Chart -->
+    <div *ngIf="showUserSkillBarChart" class="chart-popup-overlay" (click)="toggleUserSkillBarChart()">
+      <div class="chart-popup chart-popup-xlarge user-skill-chart-popup" (click)="$event.stopPropagation()">
+        <h5>🕹️ User Skill Levels (Bar)</h5>
+        <p-chart
+          type="bar"
+          [data]="userSkillBarChartData"
+          [options]="userSkillBarChartOptions"
+          class="chart-canvas"
+        ></p-chart>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleUserSkillBarChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Task Priority Distribution Polar Area Chart -->
+    <div *ngIf="showTaskPriorityPolarChart" class="chart-popup-overlay" (click)="toggleTaskPriorityPolarChart()">
+      <div class="chart-popup chart-popup-medium" (click)="$event.stopPropagation()">
+        <h5>⚠️ Task Priority Distribution</h5>
+        <canvas
+          baseChart
+          [data]="taskPriorityPolarChartData"
+          [type]="'polarArea'"
+          [options]="taskPriorityPolarChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleTaskPriorityPolarChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- New Custom Chart -->
+    <div *ngIf="showNewCustomChart" class="chart-popup-overlay" (click)="toggleNewCustomChart()">
+      <div class="chart-popup chart-popup-xlarge custom-new-chart-popup" (click)="$event.stopPropagation()">
+        <h5>📈 Custom Analytics Dashboard</h5>
+        <canvas
+          baseChart
+          [type]="'line'" 
+          [data]="newCustomChartData"
+          [options]="newCustomChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleNewCustomChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Task Status Per Project Stacked Bar Chart -->
+    <div *ngIf="showTaskStatusPerProjectChart" class="chart-popup-overlay" (click)="toggleTaskStatusPerProjectChart()">
+      <div class="chart-popup chart-popup-large" (click)="$event.stopPropagation()">
+        <h5>📊 Task Status Per Project</h5>
+        <canvas
+          baseChart
+          [data]="taskStatusPerProjectChartData"
+          [type]="'bar'"
+          [options]="taskStatusPerProjectChartOptions"
+          class="chart-canvas"
+        ></canvas>
+        <button class="btn btn-sm btn-secondary mt-3" (click)="toggleTaskStatusPerProjectChart()">
+          <i class="pi pi-times"></i> Close
+        </button>
+      </div>
+    </div>
+  </section>
+  
+</div>

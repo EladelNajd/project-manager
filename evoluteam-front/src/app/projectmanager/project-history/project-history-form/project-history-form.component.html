@@ -1,0 +1,51 @@
+<!-- project-history-form.component.html -->
+<p-toast></p-toast>
+
+<div class="card p-4">
+  <h2>Add Project History</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="projectId" class="form-label">Project</label>
+      <select id="projectId" class="form-select" formControlName="projectId" aria-label="Select project">
+        <option value="" disabled>Select a project</option>
+        <option *ngFor="let project of projects" [value]="project.id">
+          {{ project.title || project.name || ('Project #' + project.id) }}
+        </option>
+      </select>
+      <div *ngIf="form.get('projectId')?.invalid && form.get('projectId')?.touched" class="text-danger">
+        Project is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="event" class="form-label">Event</label>
+      <textarea
+        id="event"
+        class="form-control"
+        formControlName="event"
+        rows="3"
+        placeholder="Describe the event"
+      ></textarea>
+      <div *ngIf="form.get('event')?.invalid && form.get('event')?.touched" class="text-danger">
+        Event description is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input
+        id="date"
+        type="date"
+        class="form-control"
+        formControlName="date"
+      />
+      <div *ngIf="form.get('date')?.invalid && form.get('date')?.touched" class="text-danger">
+        Date is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="onCancel()">Cancel</button>
+  </form>
+</div>

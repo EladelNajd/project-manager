@@ -1,0 +1,43 @@
+// User Detail SCSS
+
+:host ::ng-deep {
+  .user-detail-container {
+    background: #f0f7ff;
+    border-radius: 0.6rem;
+    padding: 2rem;
+    box-shadow: 0 0 15px rgba(11, 58, 128, 0.15);
+    color: #0b2545;
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #0b3a80;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+
+      strong {
+        font-weight: 700;
+        color: #1976d2;
+      }
+    }
+
+    button.p-button {
+      margin-top: 1rem;
+      border-radius: 0.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0b3a80 40%, #1976d2 90%);
+      border: none;
+      color: #d9e8fc;
+      box-shadow: 0 3px 10px rgba(11, 58, 128, 0.6);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(135deg, #1976d2 40%, #0b3a80 90%);
+        cursor: pointer;
+      }
+    }
+  }
+}

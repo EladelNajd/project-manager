@@ -1,0 +1,53 @@
+<div class="review-form-container p-fluid">
+  <h3>Submit a Review</h3>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="p-field">
+      <label>Reviewer (You)</label>
+      <input type="text" [value]="currentUser?.name" disabled />
+    </div>
+
+    <div class="p-field">
+      <label for="user">User to Review *</label>
+      <p-dropdown
+        [options]="users"
+        optionLabel="label"
+        optionValue="value"
+        formControlName="user"
+        placeholder="Select a user"
+        [showClear]="true"
+      ></p-dropdown>
+      <small *ngIf="hasFieldError('user')" class="p-error">Please select a user to review.</small>
+    </div>
+
+    <div class="p-field">
+      <label for="content">Review Content *</label>
+      <textarea
+        id="content"
+        rows="5"
+        pInputTextarea
+        formControlName="content"
+        placeholder="Write your review here"
+      ></textarea>
+      <small *ngIf="hasFieldError('content')" class="p-error">Review content is required.</small>
+    </div>
+
+    <div class="p-d-flex p-jc-between p-mt-3">
+      <button
+        pButton
+        type="submit"
+        label="Submit"
+        [disabled]="reviewForm.invalid || isSubmitting"
+        icon="pi pi-check"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="p-button-secondary"
+        (click)="cancel()"
+        icon="pi pi-times"
+      ></button>
+    </div>
+  </form>
+</div>

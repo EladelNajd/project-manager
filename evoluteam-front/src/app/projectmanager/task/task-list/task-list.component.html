@@ -1,0 +1,78 @@
+<!-- Add the main container that the SCSS expects -->
+<div class="task-list-container">
+ 
+  <!-- Add header section to match SCSS styling -->
+  <div class="header-bar">
+    <h2>Task Management</h2>
+    <p-button label="Add Task" icon="pi pi-plus" (click)="openForm()"></p-button>
+  </div>
+
+  <!-- Progress Bars for Task Status -->
+  <div class="task-progress-bars">
+    <div class="p-mb-3">
+      <label>Pending Tasks</label>
+      <p-progressBar [value]="tasksPendingPercent" styleClass="p-progressbar-warning"></p-progressBar>
+      <small>{{ tasksPendingPercent | number:'1.0-0' }}% ({{ tasksPendingCount }} of {{ tasks.length }} tasks)</small>
+    </div>
+
+    <div class="p-mb-3">
+      <label>In Progress Tasks</label>
+      <p-progressBar [value]="tasksInProgressPercent" styleClass="p-progressbar-info"></p-progressBar>
+      <small>{{ tasksInProgressPercent | number:'1.0-0' }}% ({{ tasksInProgressCount }} of {{ tasks.length }} tasks)</small>
+    </div>
+
+    <div class="p-mb-3">
+      <label>Completed Tasks</label>
+      <p-progressBar [value]="tasksFinishedPercent" styleClass="p-progressbar-success"></p-progressBar>
+      <small>{{ tasksFinishedPercent | number:'1.0-0' }}% ({{ tasksFinishedCount }} of {{ tasks.length }} tasks)</small>
+    </div>
+  </div>
+
+  <!-- Tasks Table -->
+  <p-table [value]="tasks" class="p-table" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Assigned To</th>
+        <th>Project</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description || '(No description)' }}</td>
+        <td>
+          <span [ngClass]="getStatusClass(task.status)">
+            {{ task.status }}
+          </span>
+        </td>  
+        <td>{{ task.dueDate ? (task.dueDate | date: 'shortDate') : '(No due date)' }}</td>
+        <td>{{ task.assignedUser?.name || '(Unassigned)' }}</td>
+        <td>{{ task.project?.title || '(No project)' }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="p-button-rounded p-button-warning" (click)="openForm(task)"> <i class="fa-solid fa-pencil-alt"></i></p-button>
+          <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteTask(task.id!)"> <i class="fa-solid fa-trash-can"></i></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Task Form Dialog -->
+  <p-dialog
+    header="{{ selectedTask ? 'Edit Task' : 'New Task' }}"
+    [(visible)]="displayDialog"
+    [modal]="true"
+    [closable]="false"
+    [style]="{ width: '450px' }"
+  >
+    <app-task-form [task]="selectedTask" (formClosed)="onFormClose($event)"></app-task-form>
+  </p-dialog>
+
+  <!-- Toast for notifications -->
+  <p-toast></p-toast>
+
+</div>

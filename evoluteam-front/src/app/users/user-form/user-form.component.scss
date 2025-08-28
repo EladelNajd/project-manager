@@ -1,0 +1,706 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+$secondary-teal: #008faa;
+$secondary-blue: #0072bb;
+$secondary-purple: #954b97;
+$secondary-rose: #ea527e;
+$secondary-salmon: #f08590;
+
+$dark-mode-title-text: #e0e0e0;
+$dark-mode-body-text: #a0a09f;
+$dark-mode-disabled-text: #6d6d6d;
+
+$alert-success: #6eb563;
+$alert-warning: #fcbc0e;
+$alert-error: #d61b3c;
+
+$background-tessi-blue: #1a214d;
+$background-light-grey: #f2f2f2;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+$border-radius-sm: 0.375rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-2xl: 1.5rem;
+
+@mixin tessi-gradient-bg {
+  background: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $salmon 100%);
+}
+
+:host ::ng-deep {
+  /* === MAIN FORM CONTAINER === */
+  .user-form-container {
+    min-height: 100vh;
+    background: $background-light-grey;
+    padding: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .user-form-container::before,
+  .user-form-container::after {
+    content: '';
+    position: absolute;
+    @include tessi-gradient-bg;
+    opacity: 0.15;
+    transform: skewX(-33deg);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .user-form-container::before {
+    width: 300px;
+    height: 6px;
+    top: 5%;
+    left: -10%;
+    animation: floatOblique1 20s linear infinite;
+  }
+
+  .user-form-container::after {
+    width: 200px;
+    height: 4px;
+    bottom: 10%;
+    right: -5%;
+    animation: floatOblique2 25s linear infinite reverse;
+  }
+
+  /* === FORM STYLING === */
+  form {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: $border-radius-2xl;
+    padding: 3rem;
+    box-shadow: $shadow-xl;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: $tessi-blue;
+    position: relative;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    @include tessi-gradient-bg;
+    background-size: 200% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  form::after {
+    content: '📝';
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: pulse 3s infinite;
+  }
+
+  /* === FORM TITLE === */
+  .form-title {
+    color: $tessi-blue;
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .form-title::before {
+    content: '👤';
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+  }
+
+  .form-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80px;
+    height: 3px;
+    @include tessi-gradient-bg;
+    border-radius: 2px;
+    animation: slideIn 1s ease forwards 0.5s;
+  }
+
+  /* === FIELD STYLING === */
+  .p-field {
+    margin-bottom: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .p-field:hover {
+    transform: translateY(-2px);
+  }
+
+  .p-field label {
+    font-weight: 700;
+    color: $tessi-blue;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* === FIELD ICONS === */
+  .p-field label::before {
+    font-family: 'primeicons';
+    font-size: 1rem;
+    color: $light-blue;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .p-field:has(input[id="name"]) label::before {
+    content: '\e929'; /* pi-user */
+  }
+
+  .p-field:has(input[id="email"]) label::before {
+    content: '\e92b'; /* pi-envelope */
+  }
+
+  .p-field:has(textarea[id="profileInfo"]) label::before {
+    content: '\e902'; /* pi-info-circle */
+  }
+
+  .p-field:has(p-dropdown[id="role"]) label::before {
+    content: '\e96a'; /* pi-cog */
+  }
+
+  .p-field:has(p-dropdown[id="teamId"]) label::before {
+    content: '\e929'; /* pi-users */
+  }
+
+  .p-field:has(input[id="points"]) label::before {
+    content: '\e976'; /* pi-star */
+  }
+
+  .p-field:has(input[id="password"]) label::before,
+  .p-field:has(input[id="confirmPassword"]) label::before {
+    content: '\e90f'; /* pi-lock */
+  }
+
+  /* === INPUT FIELD STYLING === */
+  input[pInputText],
+  textarea[pInputTextarea] {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba($light-blue, 0.2);
+    border-radius: $border-radius-lg;
+    color: $tessi-blue;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-sm;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  input[pInputText]:focus,
+  textarea[pInputTextarea]:focus {
+    border-color: $light-blue;
+    box-shadow: 0 0 0 4px rgba($light-blue, 0.15), $shadow-md;
+    outline: none;
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+  }
+
+  input[pInputText]:hover,
+  textarea[pInputTextarea]:hover {
+    border-color: rgba($light-blue, 0.4);
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  input[pInputText][aria-invalid="true"],
+  textarea[pInputTextarea][aria-invalid="true"] {
+    border-color: $alert-error;
+    background: linear-gradient(135deg, rgba(254, 242, 242, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+    animation: shake 0.5s ease-in-out;
+  }
+
+  textarea[pInputTextarea] {
+    resize: vertical;
+    min-height: 100px;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* === DROPDOWN STYLING === */
+  .p-dropdown {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba($light-blue, 0.2);
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    min-height: 3.5rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .p-dropdown:hover {
+    border-color: rgba($light-blue, 0.4);
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  .p-dropdown:not(.p-disabled).p-focus {
+    border-color: $light-blue;
+    box-shadow: 0 0 0 4px rgba($light-blue, 0.15), $shadow-md;
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+  }
+
+  .p-dropdown .p-dropdown-label {
+    color: $tessi-blue;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+  }
+
+  .p-dropdown .p-dropdown-trigger {
+    @include tessi-gradient-bg;
+    border-radius: 0 $border-radius-lg $border-radius-lg 0;
+    width: 3rem;
+  }
+
+  .p-dropdown .p-dropdown-trigger .p-dropdown-trigger-icon {
+    color: white;
+    font-size: 1rem;
+  }
+
+  /* === DROPDOWN PANEL === */
+  .p-dropdown-panel {
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-xl;
+    border: 1px solid rgba($light-blue, 0.2);
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 0.75rem 1.25rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+    background: linear-gradient(135deg, rgba($light-blue, 0.1) 0%, rgba(240, 248, 255, 0.8) 100%);
+    color: $tessi-blue;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    @include tessi-gradient-bg;
+    color: white;
+  }
+
+  /* === ERROR MESSAGES === */
+  small.p-error {
+    color: $alert-error;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideInError 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  small.p-error::before {
+    content: '⚠️';
+    font-size: 0.9rem;
+    animation: pulse 2s infinite;
+  }
+
+  /* === BUTTON STYLING === */
+  .p-col-12:has(button) {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba($light-blue, 0.1);
+  }
+
+  button.p-button {
+    padding: 1rem 2rem;
+    border-radius: $border-radius-xl;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-lg;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    min-width: 140px;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+  }
+
+  button.p-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  button.p-button:hover::before {
+    left: 100%;
+  }
+
+  button.p-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  button.p-button:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+
+  /* === PRIMARY BUTTON (SAVE) === */
+  button.p-button:not(.p-button-secondary) {
+    @include tessi-gradient-bg;
+    color: white !important;
+    background-size: 200% 100% !important;
+  }
+
+  button.p-button:not(.p-button-secondary)::after {
+    content: '💾';
+    position: absolute;
+    right: 0.75rem;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  button.p-button:not(.p-button-secondary):hover::after {
+    opacity: 1;
+  }
+
+  button.p-button:not(.p-button-secondary):hover {
+    background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+    box-shadow: 0 12px 40px rgba($rose, 0.4);
+  }
+
+  button.p-button:not(.p-button-secondary):disabled {
+    background: linear-gradient(135deg, $dark-mode-disabled-text 0%, lighten($dark-mode-disabled-text, 10%) 100%) !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    color: white !important;
+  }
+
+  button.p-button:not(.p-button-secondary):disabled:hover {
+    transform: none;
+    box-shadow: $shadow-lg;
+  }
+
+  /* === SECONDARY BUTTON (CANCEL) === */
+  button.p-button.p-button-secondary {
+    background: linear-gradient(135deg, $dark-mode-disabled-text 0%, lighten($dark-mode-disabled-text, 10%) 100%) !important;
+    color: white !important;
+  }
+
+  button.p-button.p-button-secondary::after {
+    content: '❌';
+    position: absolute;
+    right: 0.75rem;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  button.p-button.p-button-secondary:hover::after {
+    opacity: 1;
+  }
+
+  button.p-button.p-button-secondary:hover {
+    background: linear-gradient(135deg, lighten($dark-mode-disabled-text, 10%) 40%, $dark-mode-disabled-text 90%) !important;
+    box-shadow: 0 12px 40px rgba($dark-mode-disabled-text, 0.4);
+  }
+
+  /* === FORM GRID STYLING === */
+  .p-formgrid.p-grid {
+    gap: 1.5rem;
+  }
+
+  .p-col-12.p-md-6 {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .p-col-12:not(.p-md-6) {
+    width: 100%;
+  }
+
+  /* === TOAST NOTIFICATIONS === */
+  .p-toast .p-toast-message {
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-xl;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-success {
+    background: linear-gradient(135deg, $alert-success, darken($alert-success, 10%));
+    color: white;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-error {
+    background: linear-gradient(135deg, $alert-error, darken($alert-error, 10%));
+    color: white;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-info {
+    background: linear-gradient(135deg, $light-blue, darken($light-blue, 10%));
+    color: white;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes floatOblique1 {
+    0% {
+      transform: translateX(-100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes floatOblique2 {
+    0% {
+      transform: translateX(100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(-100vw - 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+
+  @keyframes slideInError {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* === RESPONSIVE DESIGN === */
+  @media (max-width: 1200px) {
+    .user-form-container {
+      padding: 1.5rem;
+    }
+
+    form {
+      padding: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .user-form-container {
+      padding: 1rem;
+    }
+
+    form {
+      padding: 2rem;
+    }
+
+    .form-title {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .p-formgrid.p-grid {
+      gap: 1rem;
+    }
+
+    .p-col-12.p-md-6 {
+      min-width: 100%;
+    }
+
+    .p-col-12:has(button) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    button.p-button {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+      min-width: unset;
+    }
+
+    input[pInputText],
+    textarea[pInputTextarea] {
+      padding: 0.875rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .p-dropdown .p-dropdown-label {
+      padding: 0.875rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    form {
+      padding: 1.5rem;
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+    }
+
+    .p-field label {
+      font-size: 0.85rem;
+    }
+
+    input[pInputText],
+    textarea[pInputTextarea] {
+      padding: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    button.p-button {
+      padding: 0.875rem 1.25rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* === ACCESSIBILITY === */
+  button.p-button:focus-visible {
+    outline: 3px solid rgba($light-blue, 0.5) !important;
+    outline-offset: 2px;
+  }
+
+  input[pInputText]:focus-visible,
+  textarea[pInputTextarea]:focus-visible,
+  .p-dropdown:focus-visible {
+    outline: 3px solid rgba($light-blue, 0.5) !important;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* === FIELD VALIDATION STATES === */
+  .p-field.p-field-valid input[pInputText],
+  .p-field.p-field-valid textarea[pInputTextarea],
+  .p-field.p-field-valid .p-dropdown {
+    border-color: $alert-success;
+    background: linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  }
+
+  .p-field.p-field-valid label::after {
+    content: '✅';
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    animation: slideIn 0.3s ease;
+  }
+
+  /* === FOCUS TRAP FOR BETTER UX === */
+  form:focus-within {
+    box-shadow: $shadow-xl, 0 0 0 4px rgba($light-blue, 0.1);
+  }
+}

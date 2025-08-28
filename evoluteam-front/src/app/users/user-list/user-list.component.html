@@ -1,0 +1,177 @@
+<div class="user-list-container">
+  <p-confirmDialog></p-confirmDialog>
+  <p-toast></p-toast>
+  
+  <!-- Enhanced Header + Add Button -->
+  <div class="list-header">
+    <h2>User Management</h2>
+    <button
+      pButton
+      class="add-user-button p-button"
+      icon="pi pi-plus"
+      label="Add New User"
+      (click)="onAdd()"
+    ></button>
+  </div>
+
+  <!-- Enhanced Data Table Container -->
+  <div class="table-container">
+    <p-table
+      [value]="users"
+      [loading]="loading"
+      responsiveLayout="scroll"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      [globalFilterFields]="['name', 'email', 'role']"
+      #dt
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input 
+              #searchInput
+              pInputText 
+              type="text" 
+              (input)="dt.filterGlobal(searchInput.value, 'contains')" 
+              placeholder="Search users..." 
+              class="search-input"
+            />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">
+            <div class="th-content">
+              <i class="pi pi-user"></i>
+              Name 
+              <p-sortIcon field="name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="email">
+            <div class="th-content">
+              <i class="pi pi-envelope"></i>
+              Email 
+              <p-sortIcon field="email"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="role">
+            <div class="th-content">
+              <i class="pi pi-cog"></i>
+              Role 
+              <p-sortIcon field="role"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="team.name">
+            <div class="th-content">
+              <i class="pi pi-users"></i>
+              Team 
+              <p-sortIcon field="team.name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="points">
+            <div class="th-content">
+              <i class="pi pi-star"></i>
+              Points 
+              <p-sortIcon field="points"></p-sortIcon>
+            </div>
+          </th>
+          <th>
+            <div class="th-content">
+              <i class="pi pi-cogs"></i>
+              Actions
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+        <tr [attr.data-index]="rowIndex">
+          <td>
+            <div class="user-info">
+              <span class="user-name">{{ user.name }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="email-cell">
+              <i class="pi pi-envelope"></i>
+              {{ user.email }}
+            </div>
+          </td>
+          <td>
+            <div class="role-badge" [ngClass]="'role-' + user.role?.toLowerCase()">
+              {{ user.role }}
+            </div>
+          </td>
+          <td>
+            <div class="team-info">
+              <i class="pi pi-users"></i>
+              {{ user.team?.name || 'No Team' }}
+            </div>
+          </td>
+          <td>
+            <div class="points-display">
+              <i class="pi pi-star"></i>
+              <span class="points-value">{{ user.points || 0 }}</span>
+            </div>
+          </td>
+          <td class="action-buttons">
+            <button
+              pButton
+              class="p-button"
+              pTooltip="View user details"
+              tooltipPosition="top"
+              (click)="onView(user)"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+            <button
+              pButton
+              class="p-button"
+              pTooltip="Edit user"
+              tooltipPosition="top"
+              (click)="onEdit(user)"
+            >
+              <i class="fa-solid fa-pencil-alt"></i>
+            </button>
+            <button
+              pButton
+              class="p-button"
+              pTooltip="Delete user"
+              tooltipPosition="top"
+              (click)="onDelete(user)"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+          </button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">
+            <div class="empty-state">
+              <div class="empty-icon">👥</div>
+              <div class="empty-title">No Users Found</div>
+              <div class="empty-message">
+                Get started by adding your first user to the system.
+              </div>
+              <button
+                pButton
+                class="p-button p-button-primary empty-action-btn"
+                icon="pi pi-plus"
+                label="Add First User"
+                (click)="onAdd()"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

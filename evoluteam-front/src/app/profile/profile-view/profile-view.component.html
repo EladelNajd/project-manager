@@ -1,0 +1,8 @@
+<h2>Your Profile</h2>
+<div class="profile-details" *ngIf="user">
+  <p><strong>Name:</strong> {{ user.name }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Role:</strong> {{ user.role }}</p>
+  <p><strong>Points:</strong> {{ user.points }}</p>
+  <p><strong>Profile Info:</strong> {{ user.profileInfo }}</p>
+</div>

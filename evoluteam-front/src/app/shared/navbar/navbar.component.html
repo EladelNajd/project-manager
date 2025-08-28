@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar__logo" (click)="router.navigate(['/'])">
+    <img src="assets/images/Logo-tessi-2019-blanc-1000x557.jpg" alt="Tessi Logo" class="tessi-logo">
+    <span class="logo-text">Evolu<span class="highlight">Team</span></span>
+  </div>
+  <button class="navbar__toggle" (click)="toggleMenu()">☰</button>
+  <ul class="navbar__links" [class.open]="isMenuOpen">
+    <li><a routerLink="/">Home</a></li>
+    <li><a (click)="scrollToAbout()">About</a></li>
+    <ng-container *ngIf="authService.isLoggedIn(); else showLogin">
+      <li><a routerLink="/dashboard/user">User Dashboard</a></li>
+      <li><a routerLink="/dashboard/teamlead">Team Lead</a></li>
+      <li><a routerLink="/dashboard/admin">Admin</a></li>
+    <li class="profile-menu-wrapper" (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
+  <div class="profile-menu">
+    <a href="#">👤 {{ currentUser?.name || 'User' }} ▼</a>
+    <ul class="dropdown" *ngIf="showDropdown">
+      <li><a routerLink="/profile">View Profile</a></li>
+      <li><a routerLink="/profile/edit">Edit Profile</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </div>
+</li>
+
+    </ng-container>
+    <ng-template #showLogin>
+      <li><a routerLink="/auth/login" class="login">Login</a></li>
+    </ng-template>
+  </ul>
+</nav>

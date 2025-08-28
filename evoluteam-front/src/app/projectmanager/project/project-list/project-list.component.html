@@ -1,0 +1,73 @@
+<div class="user-list-container">
+ 
+  <p-toast></p-toast>
+
+  <!-- Enhanced Header + Add Button -->
+  <div class="list-header">
+    <h2>Project Management</h2>
+    <button
+      pButton
+      class="add-user-button p-button"
+      icon="pi pi-plus"
+      label="Add New Project"
+      (click)="createProject()"
+    ></button>
+  </div>
+
+  <!-- Enhanced Data Table Container -->
+  <div class="table-container">
+    <table class="p-datatable">
+      <thead class="p-datatable-thead">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Team</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="p-datatable-tbody">
+        <tr *ngFor="let project of projects">
+          <td>{{ project.title }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ getTeamName(project) }}</td>
+          <td class="action-buttons">
+            <button
+              pButton
+              class="p-button"
+              pTooltip="Edit project"
+              tooltipPosition="top"
+              (click)="editProject(project.id)"
+            >
+              <i class="fa-solid fa-pencil-alt"></i>
+            </button>
+            <button
+              pButton
+              class="p-button"
+              pTooltip="Delete project"
+              tooltipPosition="top"
+              (click)="deleteProject(project.id)"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="projects.length === 0">
+          <td colspan="4" class="text-center empty-state">
+            <div class="empty-icon">📁</div>
+            <div class="empty-title">No Projects Found</div>
+            <div class="empty-message">
+              Get started by adding your first project to the system.
+            </div>
+            <button
+              pButton
+              class="p-button p-button-primary empty-action-btn"
+              icon="pi pi-plus"
+              label="Add First Project"
+              (click)="createProject()"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

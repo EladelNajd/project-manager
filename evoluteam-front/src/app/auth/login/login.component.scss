@@ -1,0 +1,102 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('/assets/images/login-bg.jpg'); // Make sure image exists here
+  background-size: cover;
+  background-position: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.glass-container {
+  width: 350px;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: #fff;
+}
+
+h2 {
+  text-align: center;
+  color: #f0f0f0;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+:host ::ng-deep input[pInputText] {
+  margin: 0.75rem 0 1rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.25s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+:host ::ng-deep input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+:host ::ng-deep input:focus {
+  outline: none;
+  border-color: #1e3a8a; /* your deep blue primary */
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 8px rgba(30, 58, 138, 0.6);
+}
+
+:host ::ng-deep button.p-button {
+  margin-top: 1.5rem;
+  background: #1e3a8a; /* deep blue */
+  color: white;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  padding: 0.85rem 0;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+:host ::ng-deep button.p-button:disabled {
+  background-color: #6c7a99;
+  cursor: not-allowed;
+  box-shadow: none;
+  color: #ccc;
+}
+
+:host ::ng-deep button.p-button:hover:not(:disabled) {
+  background-color: #2745a7;
+  box-shadow: 0 6px 18px rgba(39, 69, 167, 0.8);
+  color: white;
+}
+
+.text-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}

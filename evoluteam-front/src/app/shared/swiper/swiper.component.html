@@ -1,0 +1,19 @@
+<div class="swiper-container">
+  <div class="swiper-images" [ngStyle]="{'transform': 'translateX(' + (-currentSlide * 100) + 'vw)'}">
+    <img 
+      *ngFor="let image of images; let i = index" 
+      [src]="image" 
+      [alt]="'Slide ' + (i + 1)" 
+      [class.active]="i === currentSlide" 
+    />
+  </div>
+
+  <div class="swiper-dots">
+    <span 
+      *ngFor="let image of images; let i = index" 
+      class="swiper-dot" 
+      [class.active]="i === currentSlide" 
+      (click)="goToSlide(i)">
+    </span>
+  </div>
+</div>

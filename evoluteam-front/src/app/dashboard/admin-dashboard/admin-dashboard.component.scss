@@ -1,0 +1,566 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// Tessi Brand Colors - EXACT SPECIFICATIONS
+$tessi-primary: #1a214d;        // Primary (texts, buttons, table headers)
+$tessi-secondary-blue: #0072bb;  // Secondary blue
+$tessi-secondary-pink: #ea527e;  // Secondary pink
+$tessi-background-dark: #1a214d; // Dark background
+$tessi-background-light: #f2f2f2; // Light background
+$white: #ffffff;
+$black: #000000;
+
+// Tessi Gradient (33° angle) - ONLY for special highlights
+$tessi-gradient: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+
+// Dark mode text colors (from specs)
+$text-title-dark: #e0e0e0;
+$text-body-dark: #a0a0a0;
+$text-disabled: #6d6d6d;
+
+/* Admin Dashboard Styles - Tessi Brand Compliant */
+.dashboard-container {
+    min-height: 100vh;
+    font-family: 'Montserrat', Arial, sans-serif;
+    padding: 2rem;
+    background: $tessi-background-light;
+    color: $tessi-primary;
+
+    // Title styling
+    h2 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: $tessi-primary;
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+
+        @media (max-width: 768px) {
+            font-size: 2.5rem;
+        }
+
+        // Tessi oblique accent under title
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%) skewX(-33deg);
+            width: 120px;
+            height: 4px;
+            background: $tessi-gradient;
+            border-radius: 2px;
+        }
+    }
+}
+
+/* Dashboard Actions Section */
+.dashboard-actions {
+    background: $white;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 20px rgba($tessi-primary, 0.1);
+    border: 1px solid rgba($tessi-primary, 0.05);
+    position: relative;
+
+    // Top gradient accent - minimal use
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: $tessi-gradient;
+        border-radius: 20px 20px 0 0;
+    }
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.action-group {
+    background: rgba($tessi-background-light, 0.3);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba($tessi-primary, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba($tessi-primary, 0.15);
+        background: $white;
+    }
+
+    // Simple accent line
+    &::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 1.5rem;
+        width: 60px;
+        height: 2px;
+        background: $tessi-secondary-blue;
+        transform: skewX(-33deg);
+    }
+
+    h3 {
+        color: $tessi-primary;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0 0 1.5rem 0;
+        text-align: center;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba($tessi-primary, 0.1);
+    }
+}
+
+.button-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    font-weight: 600;
+    font-family: 'Montserrat', Arial, sans-serif;
+    border-radius: 12px;
+    border: 2px solid $black;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    
+    // ALL BUTTONS USE SAME COLOR SCHEME - ORGANIZED
+    background: $white;
+    color: $tessi-gradient; // Using the gradient color like "john cena" highlight
+    background: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    box-shadow: 0 6px 20px rgba($black, 0.1);
+
+    &:hover {
+        transform: translateY(-3px) translateX(5px);
+        background: $tessi-secondary-blue;
+        color: $white;
+        -webkit-text-fill-color: $white; // Override gradient text on hover
+        box-shadow: 0 12px 35px rgba($tessi-secondary-blue, 0.4);
+    }
+
+    // Special case for outline buttons - keep same style
+    &.btn-outline-primary {
+        background: $white;
+        border: 2px solid $black;
+        color: $tessi-gradient;
+        background: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        box-shadow: none;
+
+        &:hover {
+            background: $tessi-secondary-blue;
+            color: $white;
+            -webkit-text-fill-color: $white;
+            transform: translateY(-3px) translateX(5px);
+        }
+    }
+}
+
+/* Dashboard Stats Section */
+.dashboard-stats {
+    background: $white;
+    border-radius: 20px;
+    border: 1px solid rgba($tessi-primary, 0.05);
+    box-shadow: 0 4px 20px rgba($tessi-primary, 0.1);
+    padding: 3rem;
+    position: relative;
+
+    // Minimal gradient accent only at top
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $tessi-gradient;
+        border-radius: 20px 20px 0 0;
+    }
+
+    h4 {
+        color: $tessi-primary;
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.metric-category {
+    background: rgba($tessi-background-light, 0.5);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba($tessi-primary, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+
+    // Simple accent - alternating colors for variety
+    &:nth-child(odd)::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%) skewX(-33deg);
+        width: 40px;
+        height: 2px;
+        background: $tessi-secondary-blue;
+    }
+
+    &:nth-child(even)::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%) skewX(-33deg);
+        width: 40px;
+        height: 2px;
+        background: $tessi-secondary-pink;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba($tessi-primary, 0.15);
+        background: $white;
+    }
+
+    h5 {
+        color: $tessi-primary;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba($tessi-primary, 0.1);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        background: rgba($white, 0.8);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.8rem;
+        border-left: 3px solid $tessi-secondary-blue;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $tessi-primary;
+        font-weight: 500;
+
+        &:hover {
+            transform: translateX(5px);
+            background: $white;
+            border-left-color: $tessi-secondary-pink;
+        }
+
+        strong {
+            color: $tessi-primary;
+        }
+    }
+}
+
+.metric-value {
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    background: rgba($tessi-secondary-blue, 0.15);
+    color: $tessi-primary;
+    font-size: 0.9rem;
+
+    &.highlight {
+        background: $tessi-gradient;
+        color: $white;
+        box-shadow: 0 3px 10px rgba($tessi-secondary-pink, 0.3);
+    }
+
+    &.pending {
+        background: linear-gradient(135deg, $tessi-secondary-pink, darken($tessi-secondary-pink, 10%));
+        color: $white;
+        box-shadow: 0 3px 10px rgba($tessi-secondary-pink, 0.3);
+    }
+
+    &.progress {
+        background: linear-gradient(135deg, $tessi-secondary-blue, darken($tessi-secondary-blue, 10%));
+        color: $white;
+        box-shadow: 0 3px 10px rgba($tessi-secondary-blue, 0.3);
+    }
+
+    &.success {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: $white;
+        box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+    }
+
+    &.warning {
+        background: linear-gradient(135deg, $tessi-primary, darken($tessi-primary, 10%));
+        color: $white;
+        box-shadow: 0 3px 10px rgba($tessi-primary, 0.3);
+    }
+}
+
+/* Charts Section */
+.charts-section {
+    background: rgba($tessi-background-light, 0.3);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid rgba($tessi-primary, 0.05);
+    position: relative;
+
+    // Minimal accent
+    &::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 2rem;
+        width: 80px;
+        height: 2px;
+        background: $tessi-secondary-blue;
+        transform: skewX(-33deg);
+    }
+
+    h5 {
+        color: $tessi-primary;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+}
+
+.chart-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chart-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Chart Popup Styles */
+.chart-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($tessi-primary, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.chart-popup {
+    background: $white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba($tessi-primary, 0.3);
+    border: 1px solid rgba($tessi-primary, 0.1);
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+
+    // Simple top accent
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $tessi-gradient;
+        border-radius: 16px 16px 0 0;
+    }
+
+    h5 {
+        color: $tessi-primary;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    &.chart-popup-medium {
+        width: 600px;
+        height: 500px;
+    }
+
+    &.chart-popup-large {
+        width: 800px;
+        height: 600px;
+    }
+
+    &.chart-popup-xlarge {
+        width: 1000px;
+        height: 700px;
+    }
+}
+
+.chart-canvas {
+    max-height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    background: $white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .dashboard-container {
+        padding: 1.5rem;
+    }
+    
+    .action-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .dashboard-actions {
+        padding: 2rem 1.5rem;
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        padding: 1rem 1.25rem;
+    }
+
+    .dashboard-stats {
+        padding: 2rem;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .chart-popup {
+        padding: 1.5rem;
+        margin: 1rem;
+
+        &.chart-popup-medium,
+        &.chart-popup-large,
+        &.chart-popup-xlarge {
+            width: calc(100vw - 2rem);
+            height: calc(100vh - 2rem);
+        }
+    }
+}
+
+/* Dark Mode Support (optional) */
+@media (prefers-color-scheme: dark) {
+    .dashboard-container {
+        background: $tessi-background-dark;
+        color: $text-title-dark;
+    }
+
+    .dashboard-actions,
+    .dashboard-stats,
+    .chart-popup {
+        background: lighten($tessi-background-dark, 5%);
+        color: $text-body-dark;
+    }
+
+    .action-group,
+    .metric-category {
+        background: rgba($white, 0.05);
+    }
+
+    .metric-category li {
+        background: rgba($white, 0.08);
+        color: $text-body-dark;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .action-group,
+    .metric-category {
+        transition: none !important;
+    }
+    
+    .chart-popup-overlay {
+        animation: none !important;
+    }
+}

@@ -1,0 +1,75 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$light-blue: #0072bb;
+$rose: #ec5f6c;
+$background-light-grey: #f2f2f2;
+$border-radius-md: 0.5rem;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+// === TEAM FORM STYLING ===
+.team-form {
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: $border-radius-md;
+  padding: 2rem;
+  box-shadow: $shadow-md;
+  font-family: 'Montserrat', sans-serif;
+
+  h2 {
+    color: $tessi-blue;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    color: $tessi-blue;
+    font-weight: 600;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $light-blue;
+    border-radius: $border-radius-md;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: $rose;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($rose, 0.2);
+    }
+  }
+
+  small {
+    color: red;
+  }
+
+  button {
+    margin-top: 10px;
+    background: linear-gradient(33deg, #005faa, #0072bb, #954b97, #ea527e, #f08590);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(33deg, #f08590, #ea527e, #954b97, #0072bb, #005faa);
+    }
+
+    &:disabled {
+      background: $light-blue;
+      cursor: not-allowed;
+    }
+  }
+}

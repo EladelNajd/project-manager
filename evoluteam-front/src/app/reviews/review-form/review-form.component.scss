@@ -1,0 +1,442 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// Tessi Design Variables
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+// Text colors for dark mode
+$title-text: #e0e0e0;
+$body-text: #a0a09f;
+$disabled-text: #6d6d6d;
+
+// Background colors
+$light-bg: #f2f2f2;
+$white: #ffffff;
+
+// Alert colors
+$success-green: #6eb643;
+$warning-yellow: #fcbe0e;
+$error-red: #d61b3c;
+
+// Tessi gradient
+@mixin tessi-gradient {
+  background: linear-gradient(33deg, $deep-blue, $light-blue, $violet, $pink, $salmon);
+}
+
+// Oblique design element
+@mixin oblique-element {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%;
+    width: 40%;
+    height: 100%;
+    @include tessi-gradient;
+    transform: skewX(-33deg);
+    opacity: 0.1;
+    z-index: 0;
+  }
+}
+
+// Animation keyframes
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+// Review Form Container
+.review-form-container {
+  font-family: 'Montserrat', Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba($tessi-blue, 0.15);
+  position: relative;
+  animation: slideInUp 0.6s ease-out;
+  @include oblique-element;
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    background: #242426;
+    color: $body-text;
+  }
+
+  h3 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    @include tessi-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      @include tessi-gradient;
+      border-radius: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: $title-text;
+      -webkit-text-fill-color: $title-text;
+    }
+  }
+
+  .p-field {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.4s ease-out;
+    animation-fill-mode: both;
+
+    &:nth-child(2) { animation-delay: 0.1s; }
+    &:nth-child(3) { animation-delay: 0.2s; }
+    &:nth-child(4) { animation-delay: 0.3s; }
+
+    label {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: $tessi-blue;
+      display: block;
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      @media (prefers-color-scheme: dark) {
+        color: $title-text;
+      }
+
+      &::before {
+        content: '📝';
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      &[for="user"]::before {
+        content: '👤';
+      }
+
+      &[for="content"]::before {
+        content: '💭';
+      }
+    }
+
+    input, textarea {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 400;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: $white;
+
+      @media (prefers-color-scheme: dark) {
+        background: #1a1a1a;
+        border-color: #404040;
+        color: $body-text;
+        
+        &::placeholder {
+          color: $disabled-text;
+        }
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $light-blue;
+        box-shadow: 0 0 0 3px rgba($light-blue, 0.2);
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background: $light-bg;
+        color: $disabled-text;
+        cursor: not-allowed;
+        
+        @media (prefers-color-scheme: dark) {
+          background: #1a1a1a;
+        }
+      }
+
+      &:hover:not(:disabled) {
+        border-color: $violet;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.5;
+    }
+
+    .p-error {
+      color: $error-red;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: flex;
+      align-items: center;
+      animation: fadeIn 0.3s ease-out;
+
+      &::before {
+        content: '⚠️';
+        margin-right: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // PrimeNG Dropdown Styling
+  ::ng-deep .p-dropdown {
+    width: 100%;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    @media (prefers-color-scheme: dark) {
+      background: #1a1a1a;
+      border-color: #404040;
+      
+      .p-dropdown-label {
+        color: $body-text;
+      }
+    }
+
+    &:hover {
+      border-color: $violet;
+    }
+
+    &.p-focus {
+      border-color: $light-blue;
+      box-shadow: 0 0 0 3px rgba($light-blue, 0.2);
+    }
+
+    .p-dropdown-trigger {
+      color: $tessi-blue;
+      
+      @media (prefers-color-scheme: dark) {
+        color: $body-text;
+      }
+    }
+
+    .p-dropdown-label {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 400;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  // Button Container
+  .p-d-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.4s ease-out 0.4s;
+    animation-fill-mode: both;
+
+    // Submit Button
+    .p-button:not(.p-button-secondary) {
+      @include tessi-gradient;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: $white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba($tessi-blue, 0.3);
+        animation: pulse 0.6s ease-in-out;
+
+        &::before {
+          left: 100%;
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        
+        &:hover {
+          transform: none;
+          box-shadow: none;
+        }
+      }
+
+      .pi {
+        margin-right: 0.5rem;
+      }
+    }
+
+    // Cancel Button
+    .p-button-secondary {
+      background: transparent;
+      border: 2px solid $tessi-blue;
+      color: $tessi-blue;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+
+      @media (prefers-color-scheme: dark) {
+        border-color: $light-blue;
+        color: $light-blue;
+      }
+
+      &:hover {
+        background: $tessi-blue;
+        color: $white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba($tessi-blue, 0.3);
+
+        @media (prefers-color-scheme: dark) {
+          background: $light-blue;
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      .pi {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  // Loading state
+  &.loading {
+    pointer-events: none;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 10;
+      border-radius: 12px;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .review-form-container {
+    margin: 1rem;
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    .p-d-flex {
+      flex-direction: column;
+
+      .p-button {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .review-form-container,
+  .p-field,
+  .p-d-flex {
+    animation: none;
+  }
+
+  .p-button:hover {
+    animation: none;
+  }
+}

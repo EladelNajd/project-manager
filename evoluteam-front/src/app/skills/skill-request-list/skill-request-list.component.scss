@@ -1,0 +1,889 @@
+// ===== TESSI DESIGN SYSTEM VARIABLES =====
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+// Color System
+$tessi-primary: #1a214d;
+$tessi-blue-deep: #005faa;
+$tessi-blue-light: #0072bb;
+$tessi-violet: #954b97;
+$tessi-rose: #ec5f6c;
+$tessi-pink: #ea527e;
+
+// Gradient
+$tessi-gradient: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+$tessi-gradient-hover: linear-gradient(33deg, #0056a0 0%, #0068b1 25%, #8a4189 50%, #e04a76 75%, #eb7b86 100%);
+
+// Background Colors
+$bg-primary: #f2f2f2;
+$bg-white: #ffffff;
+$bg-dark: #242426;
+$bg-glass: rgba(255, 255, 255, 0.95);
+$bg-glass-dark: rgba(26, 33, 77, 0.05);
+
+// Text Colors (Dark Mode)
+$text-title: #e0e0e0;
+$text-body: #a0a0a0;
+$text-disabled: #6d6d6d;
+
+// Alert Colors
+$success: #6eb563;
+$warning: #fcbc0e;
+$error: #d61b3c;
+$info: #17a2b8;
+
+// Shadows & Effects
+$shadow-card: 0 4px 20px rgba(26, 33, 77, 0.08);
+$shadow-button: 0 2px 8px rgba(26, 33, 77, 0.15);
+$shadow-hover: 0 6px 24px rgba(26, 33, 77, 0.12);
+$shadow-glass: 0 8px 32px rgba(26, 33, 77, 0.1);
+
+// Typography
+$font-primary: 'Montserrat', 'Arial', sans-serif;
+$font-weights: (
+  light: 300,
+  regular: 400,
+  semibold: 600,
+  bold: 700,
+  black: 900
+);
+
+// Border Radius
+$radius-sm: 0.375rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.75rem;
+$radius-xl: 1rem;
+
+// Animations
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+// ===== UTILITY CLASSES =====
+.tessi-gradient {
+  background: $tessi-gradient;
+}
+
+.tessi-gradient-text {
+  background: $tessi-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: map-get($font-weights, semibold);
+}
+
+.oblique-accent {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 4px;
+    height: 100%;
+    background: $tessi-gradient;
+    transform: skewX(-33deg);
+    border-radius: 2px;
+  }
+}
+
+// ===== ENHANCED TOAST STYLING =====
+::ng-deep {
+  .p-toast {
+    .p-toast-message {
+      border-radius: $radius-lg;
+      box-shadow: $shadow-glass;
+      backdrop-filter: blur(15px);
+      border: none;
+      overflow: hidden;
+      animation: slideInDown 0.4s ease-out;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $tessi-gradient;
+      }
+      
+      &.p-toast-message-success {
+        background: linear-gradient(135deg, rgba(110, 181, 99, 0.95) 0%, rgba(110, 181, 99, 0.9) 100%);
+        border-left: 4px solid $success;
+        
+        &::before {
+          background: linear-gradient(90deg, $success 0%, lighten($success, 10%) 100%);
+        }
+      }
+      
+      &.p-toast-message-warn {
+        background: linear-gradient(135deg, rgba(252, 188, 14, 0.95) 0%, rgba(252, 188, 14, 0.9) 100%);
+        border-left: 4px solid $warning;
+        
+        &::before {
+          background: linear-gradient(90deg, $warning 0%, lighten($warning, 10%) 100%);
+        }
+      }
+      
+      &.p-toast-message-error {
+        background: linear-gradient(135deg, rgba(214, 27, 60, 0.95) 0%, rgba(214, 27, 60, 0.9) 100%);
+        border-left: 4px solid $error;
+        
+        &::before {
+          background: linear-gradient(90deg, $error 0%, lighten($error, 10%) 100%);
+        }
+      }
+      
+      &.p-toast-message-info {
+        background: linear-gradient(135deg, rgba(0, 114, 187, 0.95) 0%, rgba(0, 114, 187, 0.9) 100%);
+        border-left: 4px solid $tessi-blue-light;
+        
+        &::before {
+          background: $tessi-gradient;
+        }
+      }
+      
+      .p-toast-message-content {
+        padding: 1.25rem 1.5rem;
+        
+        .p-toast-message-icon {
+          font-size: 1.5rem;
+          margin-right: 1rem;
+          animation: float 2s ease-in-out infinite;
+        }
+        
+        .p-toast-message-text {
+          font-family: $font-primary;
+          
+          .p-toast-summary {
+            font-weight: map-get($font-weights, bold);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: $bg-white;
+            display: flex;
+            align-items: center;
+            
+            &::before {
+              content: '✨';
+              margin-right: 0.5rem;
+              font-size: 1rem;
+            }
+          }
+          
+          .p-toast-detail {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+          }
+        }
+      }
+      
+      .p-toast-icon-close {
+        color: $bg-white;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg) scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+// ===== ENHANCED BUTTON STYLING =====
+.tessi-add-button {
+  margin-bottom: 2rem;
+  
+  ::ng-deep .p-button {
+    background: $tessi-gradient;
+    border: none;
+    border-radius: $radius-lg;
+    padding: 1rem 2rem;
+    font-family: $font-primary;
+    font-weight: map-get($font-weights, bold);
+    font-size: 1.1rem;
+    color: $bg-white;
+    box-shadow: $shadow-button;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      background: $tessi-gradient-hover;
+      border-radius: $radius-lg;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-hover;
+      background: $tessi-gradient-hover;
+      
+      &::before {
+        left: 100%;
+      }
+      
+      &::after {
+        opacity: 1;
+      }
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    .p-button-icon {
+      margin-right: 0.75rem;
+      font-size: 1.2rem;
+      animation: float 2s ease-in-out infinite;
+      
+      &::before {
+        content: '🚀';
+        font-size: 1rem;
+        margin-right: 0.25rem;
+      }
+    }
+    
+    .p-button-label {
+      font-weight: map-get($font-weights, bold);
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+// ===== ENHANCED TABLE STYLING =====
+.tessi-table {
+  margin-bottom: 2rem;
+  
+  ::ng-deep .p-datatable {
+    border-radius: $radius-xl;
+    overflow: hidden;
+    box-shadow: $shadow-glass;
+    animation: slideInUp 0.6s ease-out;
+    background: $bg-glass;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    .p-datatable-header {
+      background: $tessi-gradient;
+      color: $bg-white;
+      border: none;
+      padding: 2rem;
+      position: relative;
+      
+      &::before {
+        content: '📊';
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        font-size: 2rem;
+        opacity: 0.3;
+      }
+      
+      .p-datatable-title {
+        font-family: $font-primary;
+        font-weight: map-get($font-weights, black);
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+    
+    .p-datatable-thead > tr > th {
+      background: linear-gradient(135deg, $tessi-primary 0%, darken($tessi-primary, 10%) 100%);
+      color: $bg-white;
+      border: none;
+      padding: 1.25rem 1.5rem;
+      font-family: $font-primary;
+      font-weight: map-get($font-weights, bold);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      position: relative;
+      backdrop-filter: blur(10px);
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $tessi-gradient;
+      }
+      
+      &:first-child {
+        @extend .oblique-accent;
+        
+        &::before {
+          content: '';
+          margin-right: 0.5rem;
+        }
+      }
+      
+      &:nth-child(2)::before {
+        content: '🎯';
+        margin-right: 0.5rem;
+      }
+      
+      &:nth-child(3)::before {
+        content: '📈';
+        margin-right: 0.5rem;
+      }
+      
+      &:nth-child(4)::before {
+        content: '💎';
+        margin-right: 0.5rem;
+      }
+      
+      &:nth-child(5)::before {
+        content: '⚡';
+        margin-right: 0.5rem;
+      }
+    }
+    
+    .p-datatable-tbody > tr {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid rgba(26, 33, 77, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      
+      &:hover {
+        background: linear-gradient(90deg, rgba(0, 114, 187, 0.08) 0%, rgba(234, 82, 126, 0.08) 100%);
+        transform: translateX(5px) scale(1.01);
+        box-shadow: 0 4px 15px rgba(26, 33, 77, 0.1);
+      }
+      
+      > td {
+        padding: 1.25rem 1.5rem;
+        font-family: $font-primary;
+        font-weight: map-get($font-weights, regular);
+        color: $tessi-primary;
+        border: none;
+        position: relative;
+        
+        &:first-child {
+          font-weight: map-get($font-weights, bold);
+          color: $tessi-blue-light;
+          
+          &::before {
+            content: '🧑‍💼';
+            margin-right: 0.5rem;
+          }
+        }
+        
+        &:nth-child(2) {
+          &::before {
+            content: '🎯';
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+    
+    .p-paginator {
+      background: linear-gradient(135deg, $bg-glass 0%, rgba(242, 242, 242, 0.9) 100%);
+      border: none;
+      border-radius: 0 0 $radius-xl $radius-xl;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      
+      .p-paginator-pages .p-paginator-page {
+        background: rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(26, 33, 77, 0.1);
+        color: $tessi-primary;
+        border-radius: $radius-md;
+        margin: 0 0.25rem;
+        transition: all 0.3s ease;
+        font-weight: map-get($font-weights, semibold);
+        backdrop-filter: blur(5px);
+        
+        &:hover {
+          background: $tessi-blue-light;
+          color: $bg-white;
+          border-color: $tessi-blue-light;
+          transform: translateY(-2px);
+        }
+        
+        &.p-highlight {
+          background: $tessi-gradient;
+          border-color: transparent;
+          color: $bg-white;
+          box-shadow: $shadow-button;
+        }
+      }
+      
+      .p-paginator-prev,
+      .p-paginator-next {
+        background: rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(26, 33, 77, 0.1);
+        color: $tessi-primary;
+        border-radius: $radius-md;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        
+        &:hover:not(.p-disabled) {
+          background: $tessi-primary;
+          color: $bg-white;
+          border-color: $tessi-primary;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+  
+  // Enhanced Loading State
+  ::ng-deep .p-datatable-loading-overlay {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    
+    .p-datatable-loading-icon {
+      color: $tessi-blue-light;
+      animation: pulse 1.5s infinite;
+      font-size: 2rem;
+    }
+  }
+  
+  // Empty message styling
+  ::ng-deep .p-datatable-emptymessage {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(242, 242, 242, 0.8) 100%);
+    
+    .pi-info-circle {
+      animation: float 2s ease-in-out infinite;
+    }
+    
+    p {
+      font-family: $font-primary;
+      font-weight: map-get($font-weights, semibold);
+      color: $tessi-primary;
+      font-size: 1.1rem;
+      
+      &::before {
+        content: '📋';
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+// ===== ENHANCED ACTION BUTTONS IN TABLE =====
+.tessi-action-buttons {
+  ::ng-deep .p-button {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    margin: 0 0.375rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &.p-button-text {
+      background: linear-gradient(135deg, rgba(26, 33, 77, 0.1) 0%, rgba(26, 33, 77, 0.05) 100%);
+      color: $tessi-primary;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(26, 33, 77, 0.1);
+      
+      &:hover {
+        background: $tessi-blue-light;
+        color: $bg-white;
+        transform: scale(1.15) rotate(5deg);
+        box-shadow: 0 4px 15px rgba(0, 114, 187, 0.3);
+        
+        &::before {
+          opacity: 1;
+        }
+      }
+      
+      &.p-button-danger {
+        background: linear-gradient(135deg, rgba(214, 27, 60, 0.1) 0%, rgba(214, 27, 60, 0.05) 100%);
+        color: $error;
+        border-color: rgba(214, 27, 60, 0.2);
+        
+        &:hover {
+          background: $error;
+          color: $bg-white;
+          transform: scale(1.15) rotate(-5deg);
+          box-shadow: 0 4px 15px rgba(214, 27, 60, 0.3);
+        }
+      }
+    }
+    
+    .p-button-icon {
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    // Custom icons for actions
+    &:first-child .p-button-icon::before {
+      content: '';
+      font-size: 0.8rem;
+      margin-right: 0.125rem;
+    }
+    
+    &:last-child .p-button-icon::before {
+      content: '';
+      font-size: 0.8rem;
+      margin-right: 0.125rem;
+    }
+  }
+}
+
+// ===== ENHANCED STATUS BADGES =====
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-lg;
+  font-family: $font-primary;
+  font-weight: map-get($font-weights, bold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  
+  &::before {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  &.pending {
+    background: linear-gradient(135deg, rgba(252, 188, 14, 0.25) 0%, rgba(252, 188, 14, 0.15) 100%);
+    color: darken($warning, 25%);
+    border: 2px solid rgba(252, 188, 14, 0.4);
+    
+    &::before {
+      content: '⏳';
+    }
+  }
+  
+  &.approved {
+    background: linear-gradient(135deg, rgba(110, 181, 99, 0.25) 0%, rgba(110, 181, 99, 0.15) 100%);
+    color: darken($success, 25%);
+    border: 2px solid rgba(110, 181, 99, 0.4);
+    
+    &::before {
+      content: '✅';
+    }
+  }
+  
+  &.rejected {
+    background: linear-gradient(135deg, rgba(214, 27, 60, 0.25) 0%, rgba(214, 27, 60, 0.15) 100%);
+    color: darken($error, 15%);
+    border: 2px solid rgba(214, 27, 60, 0.4);
+    
+    &::before {
+      content: '❌';
+    }
+  }
+}
+
+// ===== ENHANCED DIALOG STYLING =====
+.tessi-dialog {
+  ::ng-deep .p-dialog {
+    border-radius: $radius-xl;
+    box-shadow: 0 25px 50px rgba(26, 33, 77, 0.2);
+    border: none;
+    overflow: hidden;
+    animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    
+    .p-dialog-header {
+      background: $tessi-gradient;
+      color: $bg-white;
+      padding: 2rem;
+      border: none;
+      position: relative;
+      
+      &::before {
+        content: '📝';
+        position: absolute;
+        top: 1.5rem;
+        right: 4rem;
+        font-size: 1.5rem;
+        opacity: 0.7;
+      }
+      
+      .p-dialog-title {
+        font-family: $font-primary;
+        font-weight: map-get($font-weights, black);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        &::before {
+          content: '✨';
+          margin-right: 0.75rem;
+        }
+      }
+      
+      .p-dialog-header-close {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        color: $bg-white;
+        border: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg) scale(1.1);
+          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .p-dialog-header-close-icon::before {
+          content: '✖️';
+          font-size: 1rem;
+        }
+      }
+    }
+    
+    .p-dialog-content {
+      padding: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, 
+          rgba(0, 114, 187, 0.03) 0%, 
+          rgba(234, 82, 126, 0.03) 50%,
+          rgba(149, 75, 151, 0.03) 100%);
+        pointer-events: none;
+      }
+      
+      app-skill-request-form {
+        display: block;
+        animation: slideInUp 0.5s ease-out 0.1s both;
+        padding: 2.5rem;
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+  
+  ::ng-deep .p-dialog-mask {
+    background: rgba(26, 33, 77, 0.6);
+    backdrop-filter: blur(12px);
+    animation: fadeInScale 0.3s ease-out;
+  }
+}
+
+// ===== FORM STYLING ENHANCEMENTS =====
+::ng-deep app-skill-request-form {
+  .p-field {
+    margin-bottom: 2rem;
+    position: relative;
+    
+    label {
+      font-family: $font-primary;
+      font-weight: map-get($font-weights, semibold);
+      color: $tessi-primary;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      
+      &::before {
+        margin-right: 0.5rem;
+      }
+      
+      &[for*="user"]::before {
+        content: '';
+      }
+      
+      &[for*="skill"]::before {
+        content: '🎯';
+      }
+      
+      &[for*="point"]::before {
+        content: '💎';
+      }
+      
+      &[for*="status"]::before {
+        content: '📊';
+      }
+    }
+    
+    .p-inputtext,
+    .p-dropdown,
+    .p-inputnumber-input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid rgba(26, 33, 77, 0.1);
+      border-radius: $radius-lg;
+      font-family: $font-primary;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      
+      &:focus {
+        border-color: $tessi-blue-light;
+        box-shadow: 0 0 0 3px rgba(0, 114, 187, 0.1);
+        background: rgba(255, 255, 255, 1);
+        transform: translateY(-2px);
+      }
+      
+      &:hover {
+        border-color: rgba(26, 33, 77, 0.2);
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  .p-button {
+    padding: 1rem 2rem;
+    border-radius: $radius-lg;
+    font-family: $font-primary;
+    font-weight: map-get($font-weights, bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+    
+    &:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    &.p-button-success {
+      background: linear-gradient(135deg, $success 0%, lighten($success, 10%) 100%);
+      border: none;
+      
+      &:hover {
+        background: linear-gradient(135deg, darken($success, 5%) 0%, $success 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(110, 181, 99, 0.3);
+      }
+      
+      .p-button-label::before {
+        content: '💾';
+        margin-right: 0.5rem;
+      }
+    }
+    
+    &.p-button-secondary {
+      background: linear-gradient(135)}}}

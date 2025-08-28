@@ -1,0 +1,20 @@
+<div class="team-form">
+  <h2>{{ editing ? 'Edit Team' : 'Create Team' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Name:</label>
+      <input formControlName="name" />
+      <small *ngIf="form.get('name')?.invalid && form.get('name')?.touched">Name is required.</small>
+    </div>
+
+    <div>
+      <label>Description:</label>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      {{ editing ? 'Update' : 'Create' }}
+    </button>
+  </form>
+</div>

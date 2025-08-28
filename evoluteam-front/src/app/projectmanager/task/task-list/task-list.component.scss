@@ -1,0 +1,895 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// TESSI Variables
+$tessi-blue: #1a214d;
+$tessi-deep-blue: #005faa;
+$tessi-light-blue: #0072bb;
+$tessi-violet: #954b97;
+$tessi-rose: #ec5f6c;
+$tessi-pink: #ea527e;
+$tessi-salmon: #f08590;
+
+$tessi-background: #f2f2f2;
+$white: #ffffff;
+$black: #000000;
+
+// Alert colors
+$success-green: #6eb643;
+$warning-yellow: #fcbe0e;
+$error-red: #d61b3c;
+
+// Dark mode text
+$dark-title: #e0e0e0;
+$dark-text: #a0a09f;
+$dark-disabled: #6d6d6d;
+
+// Tessi gradient (33° angle)
+@mixin tessi-gradient() {
+  background: linear-gradient(33deg, $tessi-deep-blue, $tessi-light-blue, $tessi-violet, $tessi-pink, $tessi-salmon);
+}
+
+// Oblique elements at 33°
+@mixin oblique-element($height: 4px) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $height;
+    @include tessi-gradient();
+    transform: skewY(-33deg);
+    transform-origin: top left;
+    z-index: 1;
+  }
+}
+
+// Oblique accent elements
+@mixin oblique-accent($width: 60px, $height: 4px, $position: 'top-right') {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: $width;
+    height: $height;
+    @include tessi-gradient();
+    transform: skewY(-33deg);
+    
+    @if $position == 'top-right' {
+      top: 10px;
+      right: -10px;
+    } @else if $position == 'bottom-left' {
+      bottom: 10px;
+      left: -10px;
+    }
+    
+    opacity: 0.8;
+    border-radius: 2px;
+  }
+}
+
+// Card elevation mixin
+@mixin card-elevation($level: 1) {
+  @if $level == 1 {
+    box-shadow: 0 2px 8px rgba($tessi-blue, 0.08), 0 1px 3px rgba($tessi-blue, 0.06);
+  } @else if $level == 2 {
+    box-shadow: 0 4px 20px rgba($tessi-blue, 0.12), 0 2px 6px rgba($tessi-blue, 0.08);
+  } @else if $level == 3 {
+    box-shadow: 0 8px 32px rgba($tessi-blue, 0.16), 0 4px 12px rgba($tessi-blue, 0.12);
+  }
+}
+
+// Main container
+.task-list-container {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: $tessi-background;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  
+  // Add background oblique elements
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    @include tessi-gradient();
+    z-index: 10;
+  }
+  
+  // Header styling
+  .header-bar {
+    @include oblique-element(6px);
+    @include card-elevation(2);
+    background: $white;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    
+    // Multiple oblique accents for dynamic feel
+    &::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      right: -15px;
+      width: 80px;
+      height: 6px;
+      @include tessi-gradient();
+      transform: skewY(-33deg);
+      opacity: 0.6;
+      border-radius: 3px;
+    }
+    
+    // Additional accent
+    &::before {
+      z-index: 2;
+    }
+    
+    h2 {
+      color: $tessi-blue;
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin: 0;
+      position: relative;
+      z-index: 3;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 70%;
+        height: 4px;
+        @include tessi-gradient();
+        border-radius: 2px;
+      }
+    }
+    
+    // Button styling in header
+    :host ::ng-deep p-button .p-button,
+    p-button ::ng-deep .p-button {
+      @include tessi-gradient();
+      border: none !important;
+      border-radius: 12px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba($tessi-pink, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba($white, 0.2), transparent);
+        transition: left 0.5s;
+      }
+      
+      &:hover {
+        transform: translateY(-3px) scale(1.02) !important;
+        box-shadow: 0 8px 30px rgba($tessi-pink, 0.4) !important;
+        
+        &::before {
+          left: 100%;
+        }
+      }
+      
+      &:active {
+        transform: translateY(-1px) scale(1.01) !important;
+      }
+      
+      .p-button-icon {
+        margin-right: 0.75rem;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  // Progress bars section
+  .task-progress-bars {
+    @include card-elevation(2);
+    background: $white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    position: relative;
+    
+    // Add oblique accent
+    @include oblique-accent(100px, 5px, 'top-right');
+    
+    .p-mb-3 {
+      margin-bottom: 2.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      label {
+        display: block;
+        color: $tessi-blue;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 30px;
+          height: 2px;
+          background: $tessi-light-blue;
+          border-radius: 1px;
+        }
+      }
+      
+      small {
+        display: block;
+        color: $dark-text;
+        font-size: 0.9rem;
+        margin-top: 0.75rem;
+        font-weight: 500;
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  // Enhanced status badge classes
+  .status-pending {
+    background: linear-gradient(135deg, $warning-yellow, lighten($warning-yellow, 10%)) !important;
+    color: $white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 12px rgba($warning-yellow, 0.4);
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($white, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+  }
+  
+  .status-in-progress {
+    background: linear-gradient(135deg, $tessi-light-blue, lighten($tessi-light-blue, 10%)) !important;
+    color: $white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 12px rgba($tessi-light-blue, 0.4);
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($white, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+  }
+  
+  .status-completed {
+    background: linear-gradient(135deg, $success-green, lighten($success-green, 10%)) !important;
+    color: $white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 12px rgba($success-green, 0.4);
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($white, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+  }
+.p-datatable {
+  @include card-elevation(3);
+  background: $white !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: none !important;
+
+  .p-datatable-header {
+    @include oblique-element(6px);
+    background: linear-gradient(135deg, $tessi-blue, darken($tessi-blue, 5%)) !important;
+    color: $white !important;
+    padding: 1.5rem 1.25rem !important; // Adjusted padding
+    border-bottom: none !important;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 4px;
+      @include tessi-gradient();
+      transform: skewY(-33deg);
+      opacity: 0.7;
+    }
+  }
+
+  .p-datatable-thead > tr > th {
+    background: linear-gradient(135deg, $tessi-blue, darken($tessi-blue, 3%)) !important;
+    color: $white !important;
+    font-family: 'Montserrat', Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    padding: 1.5rem 1.25rem !important; // Consistent padding
+    border: none !important;
+    position: relative;
+    transition: all 0.3s ease !important;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      @include tessi-gradient();
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+
+    // Set specific widths for columns
+    &:nth-child(1) { width: 15%; } // Title
+    &:nth-child(2) { width: 35%; } // Description
+    &:nth-child(3) { width: 10%; } // Status
+    &:nth-child(4) { width: 15%; } // Due Date
+    &:nth-child(5) { width: 15%; } // Assigned To
+    &:nth-child(6) { width: 10%; } // Project
+    &:nth-child(7) { width: 10%; } // Actions
+  }
+
+  .p-datatable-tbody > tr {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-bottom: 1px solid rgba($tessi-blue, 0.08) !important;
+    position: relative;
+
+    &:hover {
+      background: linear-gradient(90deg, 
+                  rgba($tessi-light-blue, 0.04), 
+                  rgba($tessi-pink, 0.02), 
+                  rgba($tessi-light-blue, 0.04)) !important;
+      transform: translateX(8px) scale(1.01) !important;
+      box-shadow: 0 4px 20px rgba($tessi-blue, 0.1) !important;
+    }
+
+    &:nth-child(even) {
+      background: rgba($tessi-blue, 0.02) !important;
+    }
+
+    > td {
+      padding: 1.5rem 1.25rem !important; // Consistent padding
+      font-family: 'Montserrat', Arial, sans-serif !important;
+      font-weight: 500 !important;
+      color: $tessi-blue !important;
+      border: none !important;
+      vertical-align: middle !important;
+      position: relative;
+      z-index: 2;
+
+      // Title column styling
+      &:first-child {
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        color: darken($tessi-blue, 5%) !important;
+      }
+
+      // Description column
+      &:nth-child(2) {
+        color: lighten($tessi-blue, 10%) !important;
+        font-size: 0.9rem !important;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      // Due date styling
+      &:nth-child(4) {
+        font-weight: 600 !important;
+        color: $tessi-deep-blue !important;
+      }
+
+      // Assigned user styling
+      &:nth-child(5) {
+        color: $tessi-light-blue !important;
+        font-weight: 600 !important;
+      }
+
+      // Project column
+      &:nth-child(6) {
+        color: $tessi-violet !important;
+        font-weight: 500 !important;
+      }
+
+      // Action buttons
+      p-button {
+        margin-right: 0.75rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .p-button {
+          width: 44px !important;
+          height: 44px !important;
+          border-radius: 12px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          border: 2px solid transparent !important;
+          position: relative !important;
+          overflow: hidden !important;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba($white, 0.2);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 10px;
+          }
+
+          &:hover::before {
+            transform: scale(1);
+          }
+
+          &.p-button-warning {
+            background: linear-gradient(135deg, $warning-yellow, lighten($warning-yellow, 15%)) !important;
+            box-shadow: 0 4px 16px rgba($warning-yellow, 0.3) !important;
+
+            &:hover {
+              transform: translateY(-4px) scale(1.08) !important;
+              box-shadow: 0 8px 25px rgba($warning-yellow, 0.4) !important;
+            }
+          }
+
+          &.p-button-danger {
+            background: linear-gradient(135deg, $error-red, lighten($error-red, 15%)) !important;
+            box-shadow: 0 4px 16px rgba($error-red, 0.3) !important;
+
+            &:hover {
+              transform: translateY(-4px) scale(1.08) !important;
+              box-shadow: 0 8px 25px rgba($error-red, 0.4) !important;
+            }
+          }
+
+          .p-button-icon {
+            font-size: 1.1rem !important;
+            z-index: 2;
+            position: relative;
+          }
+        }
+      }
+    }
+  }
+
+  // Enhanced Paginator
+  .p-paginator {
+    background: linear-gradient(135deg, 
+                rgba($tessi-blue, 0.03), 
+                rgba($tessi-pink, 0.02)) !important;
+    border: none !important;
+    padding: 1.25rem !important;
+
+    .p-paginator-pages .p-paginator-page {
+      color: $tessi-blue !important;
+      font-family: 'Montserrat', Arial, sans-serif !important;
+      font-weight: 600 !important;
+      border-radius: 10px !important;
+      margin: 0 0.3rem !important;
+      transition: all 0.3s ease !important;
+      position: relative !important;
+      overflow: hidden !important;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        @include tessi-gradient();
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &.p-highlight {
+        @include tessi-gradient();
+        color: $white !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 15px rgba($tessi-pink, 0.3) !important;
+      }
+
+      &:hover:not(.p-highlight) {
+        background: rgba($tessi-light-blue, 0.1) !important;
+        transform: translateY(-2px) !important;
+
+        &::before {
+          opacity: 0.1;
+        }
+      }
+    }
+
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+      color: $tessi-blue !important;
+      border-radius: 10px !important;
+      transition: all 0.3s ease !important;
+
+      &:hover {
+        background: rgba($tessi-light-blue, 0.1) !important;
+        transform: translateY(-2px) scale(1.05) !important;
+      }
+    }
+  }
+}
+
+  
+}
+
+
+// Global PrimeNG overrides - Enhanced table styling
+:host ::ng-deep {
+  // Progress bar styling
+  .p-progressbar {
+    height: 14px !important;
+    border-radius: 12px !important;
+    background: rgba($tessi-blue, 0.1) !important;
+    overflow: hidden;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+                    rgba($white, 0.1) 25%, 
+                    transparent 25%, 
+                    transparent 50%, 
+                    rgba($white, 0.1) 50%, 
+                    rgba($white, 0.1) 75%, 
+                    transparent 75%);
+      background-size: 8px 8px;
+      animation: progress-stripes 1s linear infinite;
+    }
+    
+    .p-progressbar-value {
+      border-radius: 12px !important;
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      position: relative;
+      overflow: hidden;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba($white, 0.4), transparent);
+        animation: shimmer 3s infinite;
+      }
+    }
+    
+    &.p-progressbar-warning .p-progressbar-value {
+      background: linear-gradient(90deg, $warning-yellow, lighten($warning-yellow, 15%)) !important;
+    }
+    
+    &.p-progressbar-info .p-progressbar-value {
+      background: linear-gradient(90deg, $tessi-light-blue, lighten($tessi-light-blue, 15%)) !important;
+    }
+    
+    &.p-progressbar-success .p-progressbar-value {
+      background: linear-gradient(90deg, $success-green, lighten($success-green, 15%)) !important;
+    }
+  }
+  
+  // Enhanced Table styling
+
+  // Enhanced Dialog styling
+  .p-dialog {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    @include card-elevation(3);
+    
+    .p-dialog-header {
+      @include oblique-element(6px);
+      background: linear-gradient(135deg, $tessi-blue, darken($tessi-blue, 5%)) !important;
+      color: $white !important;
+      font-family: 'Montserrat', Arial, sans-serif !important;
+      font-weight: 700 !important;
+      border-radius: 20px 20px 0 0 !important;
+      padding: 2rem 2.5rem !important;
+      position: relative;
+      
+      .p-dialog-title {
+        font-size: 1.4rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 50px;
+        height: 4px;
+        @include tessi-gradient();
+        transform: skewY(-33deg);
+        opacity: 0.8;
+      }
+    }
+    
+    .p-dialog-content {
+      background: $white !important;
+      padding: 2.5rem !important;
+      border-radius: 0 0 20px 20px !important;
+    }
+  }
+  
+  .p-dialog-mask {
+    background: rgba($tessi-blue, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+  
+  // Enhanced Toast notifications
+  .p-toast {
+    .p-toast-message {
+      border-radius: 16px !important;
+      @include card-elevation(3);
+      overflow: hidden !important;
+      
+      &.p-toast-message-success {
+        background: linear-gradient(135deg, $success-green, lighten($success-green, 15%)) !important;
+        border-left: 6px solid darken($success-green, 15%) !important;
+      }
+      
+      &.p-toast-message-error {
+        background: linear-gradient(135deg, $error-red, lighten($error-red, 15%)) !important;
+        border-left: 6px solid darken($error-red, 15%) !important;
+      }
+      
+      &.p-toast-message-warn {
+        background: linear-gradient(135deg, $warning-yellow, lighten($warning-yellow, 15%)) !important;
+        border-left: 6px solid darken($warning-yellow, 15%) !important;
+      }
+      
+      &.p-toast-message-info {
+        @include tessi-gradient();
+        border-left: 6px solid $tessi-blue !important;
+      }
+      
+      .p-toast-message-content {
+        font-family: 'Montserrat', Arial, sans-serif !important;
+        font-weight: 600 !important;
+      }
+    }
+  }
+}
+
+// Enhanced Animations
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progress-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 8px 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Apply entrance animations
+.task-list-container {
+  .header-bar {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  .task-progress-bars {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+  
+  .p-datatable {
+    animation: fadeInUp 1s ease-out 0.4s both;
+  }
+}
+
+// Enhanced Responsive design
+@media (max-width: 1024px) {
+  .task-list-container {
+    padding: 1.5rem;
+    
+    .header-bar {
+      padding: 2rem 1.5rem 1.5rem;
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .task-list-container {
+    padding: 1rem;
+    
+    .header-bar {
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      
+      h2 {
+        font-size: 1.6rem;
+        
+        &::after {
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+        }
+      }
+    }
+    
+    .task-progress-bars {
+      padding: 1.5rem;
+    }
+  }
+  
+  :host ::ng-deep .p-datatable {
+    .p-datatable-thead > tr > th,
+    .p-datatable-tbody > tr > td {
+      padding: 1rem 0.75rem !important;
+      font-size: 0.85rem !important;
+    }
+    
+    .p-datatable-tbody > tr > td {
+      &:nth-child(2) {
+        max-width: 120px;
+      }
+    }
+  }
+}
+
+// Dark mode enhancements
+@media (prefers-color-scheme: dark) {
+  .task-list-container {
+    background-color: #0a0a0a;
+    
+    .header-bar,
+    .task-progress-bars {
+      background: linear-gradient(135deg, #1a1a1c, #242426) !important;
+      color: $dark-text !important;
+      border: 1px solid rgba($tessi-light-blue, 0.1);
+    }
+    
+    .header-bar h2 {
+      color: $dark-title !important;
+    }
+  }
+  
+  :host ::ng-deep .p-datatable {
+    background: linear-gradient(135deg, #1a1a1c, #242426) !important;
+    color: $dark-text !important;
+    border: 1px solid rgba($tessi-light-blue, 0.1) !important;
+    
+    .p-datatable-tbody > tr {
+      border-bottom-color: rgba($tessi-light-blue, 0.1) !important;
+      
+      &:nth-child(even) {
+        background: rgba($tessi-blue, 0.05) !important;
+      }
+      
+      > td {
+        color: $dark-text !important;
+        
+        &:first-child {
+          color: $dark-title !important;
+        }
+      }
+    }
+  }
+}

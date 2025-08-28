@@ -1,0 +1,90 @@
+<p-toast></p-toast>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="p-fluid p-formgrid p-grid">
+
+    <!-- Name -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="name">Name</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+      <small *ngIf="f['name'].invalid && f['name'].touched" class="p-error">
+        Name is required.
+      </small>
+    </div>
+
+    <!-- Email -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText formControlName="email" />
+      <small *ngIf="f['email'].invalid && f['email'].touched" class="p-error">
+        Valid email is required.
+      </small>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="p-field p-col-12">
+      <label for="profileInfo">Profile Info</label>
+      <textarea id="profileInfo" rows="3" pInputTextarea formControlName="profileInfo"></textarea>
+    </div>
+
+    <!-- Role Dropdown -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="role">Role</label>
+      <p-dropdown 
+        id="role"
+        [options]="roles" 
+        formControlName="role" 
+        placeholder="Select role"
+        [showClear]="true">
+      </p-dropdown>
+      <small *ngIf="f['role'].invalid && f['role'].touched" class="p-error">
+        Role is required.
+      </small>
+    </div>
+
+    <!-- Team Dropdown -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="teamId">Team</label>
+      <p-dropdown 
+        id="teamId"
+        [options]="teams" 
+        optionLabel="name" 
+        optionValue="id" 
+        formControlName="teamId"
+        placeholder="Select a team"
+        [showClear]="true"
+        [filter]="true">
+      </p-dropdown>
+    </div>
+
+    <!-- Points -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="points">Points</label>
+      <input id="points" type="number" pInputText formControlName="points" />
+    </div>
+
+    <!-- Password -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="password">Password</label>
+      <input id="password" type="password" pInputText formControlName="password" />
+      <small *ngIf="f['password'].invalid && f['password'].touched" class="p-error">
+        Password must be at least 6 characters.
+      </small>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" pInputText formControlName="confirmPassword" />
+      <small *ngIf="f['confirmPassword'].errors?.['mismatch'] && f['confirmPassword'].touched" class="p-error">
+        Passwords must match.
+      </small>
+    </div>
+
+    <!-- Buttons -->
+    <div class="p-col-12">
+      <button pButton type="submit" label="Save" [disabled]="userForm.invalid"></button>
+      <button pButton type="button" label="Cancel" class="p-button-secondary" (click)="onCancel()"></button>
+    </div>
+  </div>
+</form>

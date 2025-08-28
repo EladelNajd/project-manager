@@ -1,0 +1,64 @@
+<div class="skills-list-container">
+  <p-toast></p-toast>
+  
+  <div class="header-bar">
+    <h2>Skills</h2>
+    <div class="action-buttons">
+      <button class="btn add-skill-button" (click)="openAddDialog()">+ Add Skill</button>
+      <button class="btn back-button" (click)="goBack()">← Back</button>
+    </div>
+  </div>
+
+  <div class="skills-content">
+    <ul class="skills-list" *ngIf="skills.length > 0; else noSkills">
+      <li *ngFor="let skill of skills" class="skill-item">
+        <h3 class="skill-name">{{ skill.name }}</h3>
+        <div class="skill-actions">
+          <button class="btn edit-skill-btn" (click)="editSkill(skill)">Edit</button>
+          <button class="btn delete-skill-btn" (click)="deleteSkill(skill.id)">Delete</button>
+        </div>
+      </li>
+    </ul>
+    
+    <ng-template #noSkills>
+      <div class="empty-state">
+        <span class="empty-icon">📝</span>
+        <h3 class="empty-title">No Skills Yet</h3>
+        <p class="empty-message">Add your first skill to get started!</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- PrimeNG Dialog Popup -->
+  <p-dialog
+    [(visible)]="displayDialog"
+    [modal]="true"
+    [closable]="true"
+    [dismissableMask]="true"
+    [style]="{ width: '400px' }"
+    [header]="isEditing ? 'Edit Skill' : 'Add Skill'"
+    (onHide)="resetForm()"
+  >
+    <form [formGroup]="skillForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="name">Skill Name</label>
+        <input
+          id="name"
+          formControlName="name"
+          placeholder="Skill Name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': skillForm.controls['name'].invalid && skillForm.controls['name'].touched }"
+        />
+        <div *ngIf="skillForm.controls['name'].invalid && skillForm.controls['name'].touched" class="text-danger">
+          Skill name is required.
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+        <button pButton type="button" class="btn btn-secondary me-2" (click)="displayDialog = false">Close</button>
+        <button pButton type="submit" class="btn btn-primary" [disabled]="skillForm.invalid">
+          {{ isEditing ? 'Update' : 'Add' }}
+        </button>
+      </div>
+    </form>
+  </p-dialog>
+</div>

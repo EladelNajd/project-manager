@@ -1,0 +1,16 @@
+<h2>Edit Profile</h2>
+
+<!-- PrimeNG Toast for messages - will use default theme styling -->
+<p-toast></p-toast>
+
+<form class="edit-form" (ngSubmit)="save()">
+  <label>
+    Name:
+    <input [(ngModel)]="user.name" name="name" required />
+  </label>
+  <label>
+    Profile Info:
+    <input [(ngModel)]="user.profileInfo" name="profileInfo" />
+  </label>
+  <button type="submit">Save</button>
+</form>

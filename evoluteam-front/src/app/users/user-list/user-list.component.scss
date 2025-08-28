@@ -1,0 +1,677 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+$secondary-teal: #008faa;
+$secondary-blue: #0072bb;
+$secondary-purple: #954b97;
+$secondary-rose: #ea527e;
+$secondary-salmon: #f08590;
+
+$dark-mode-title-text: #e0e0e0;
+$dark-mode-body-text: #a0a09f;
+$dark-mode-disabled-text: #6d6d6d;
+
+$alert-success: #6eb563;
+$alert-warning: #fcbc0e;
+$alert-error: #d61b3c;
+
+$background-tessi-blue: #1a214d;
+$background-light-grey: #f2f2f2;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+$border-radius-sm: 0.375rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-2xl: 1.5rem;
+
+@mixin tessi-gradient-bg {
+  background: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $salmon 100%);
+}
+
+:host ::ng-deep {
+  /* === MAIN CONTAINER === */
+  .user-list-container {
+    min-height: 100vh;
+    background: $background-light-grey;
+    padding: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .user-list-container::before,
+  .user-list-container::after {
+    content: '';
+    position: absolute;
+    @include tessi-gradient-bg;
+    opacity: 0.15;
+    transform: skewX(-33deg);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .user-list-container::before {
+    width: 300px;
+    height: 6px;
+    top: 5%;
+    left: -10%;
+    animation: floatOblique1 20s linear infinite;
+  }
+
+  .user-list-container::after {
+    width: 200px;
+    height: 4px;
+    bottom: 10%;
+    right: -5%;
+    animation: floatOblique2 25s linear infinite reverse;
+  }
+
+  /* === HEADER SECTION === */
+  .list-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: $border-radius-2xl;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: $shadow-xl;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    
+  }
+
+  .list-header h2 {
+    color: $tessi-blue;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .list-header h2::before {
+    content: '👥';
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+  }
+
+  .list-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    @include tessi-gradient-bg;
+    border-radius: 2px;
+    transform: scaleX(0);
+    animation: slideIn 1s ease forwards 0.5s;
+  }
+
+  /* === ADD USER BUTTON (FIXED) === */
+  .add-user-button.p-button {
+    @include tessi-gradient-bg;
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1.2rem 2.5rem;
+    min-width: 200px;
+    height: 3.5rem;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 6px 15px rgba($pink, 0.4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .return-button { 
+
+     @include tessi-gradient-bg;
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1.2rem 2.5rem;
+    min-width: 200px;
+    height: 3.5rem;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 6px 15px rgba($pink, 0.4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+  .add-user-button.p-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  .add-user-button.p-button:hover {
+    background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba($rose, 0.4);
+  }
+
+  .add-user-button.p-button:hover::before {
+    left: 100%;
+  }
+
+  .add-user-button.p-button:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+
+  .add-user-button.p-button .pi {
+    font-size: 1.25rem !important;
+    font-weight: 900;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* === DATA TABLE CONTAINER === */
+  .table-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: $border-radius-2xl;
+    padding: 2rem;
+    box-shadow: $shadow-xl;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .table-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    @include tessi-gradient-bg;
+    background-size: 200% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  .p-datatable .p-datatable-thead > tr th {
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    text-align: left;
+    background: $tessi-blue;
+    color: white;
+    font-weight: 600;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .p-datatable .p-datatable-thead > tr th:last-child {
+    border-right: none;
+  }
+
+  .p-datatable .p-datatable-tbody > tr td {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: $tessi-blue;
+    border-right: 1px solid rgba($tessi-blue, 0.05);
+    vertical-align: middle;
+    font-weight: 400;
+    transition: background-color 0.3s ease;
+  }
+
+  .p-datatable .p-datatable-tbody > tr:nth-child(even) {
+    background-color: rgba($tessi-blue, 0.02);
+  }
+
+  .p-datatable .p-datatable-tbody > tr:hover {
+    background-color: rgba($tessi-blue, 0.05);
+  }
+
+  .p-datatable .p-datatable-tbody > tr td:last-child {
+    border-right: none;
+  }
+
+  /* Specific cell styling for alignment and icons */
+  .user-info,
+  .email-cell,
+  .role-badge,
+  .team-info,
+  .points-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .th-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Role badge styling */
+  .role-badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: $border-radius-md;
+    font-weight: 600;
+    color: white;
+    text-transform: capitalize;
+    font-size: 0.85rem;
+    display: inline-block;
+  }
+
+  .role-badge.role-admin {
+    background: $deep-blue;
+  }
+
+  .role-badge.role-team_lead {
+    background: $light-blue;
+  }
+
+  .role-badge.role-user {
+    background: $violet;
+  }
+
+  /* Points display */
+  .points-display .points-value {
+    font-weight: 700;
+    color: $rose;
+  }
+
+     .action-buttons .p-button {
+     height: 2.5rem !important; /* Adjust height */
+     width: 2.5rem !important; /* Adjust width */
+     padding: 0 !important; /* No padding */
+     background: transparent !important; /* Transparent background */
+     border: none !important; /* No border */
+     display: inline-flex !important; /* Flex display */
+     align-items: center !important; /* Center items */
+     justify-content: center !important; /* Center items */
+     color: $tessi-blue !important; /* Icon color */
+   }
+
+  /* Search input styling */
+  .table-header {
+    display: flex;
+    justify-content:    flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .search-input {
+    border: 1px solid $dark-mode-disabled-text; // Using a neutral grey for border
+    border-radius: $border-radius-md;
+    padding: 0.75rem 1rem 0.75rem 2.5rem; /* Space for icon */
+    font-size: 0.9rem;
+    color: $tessi-blue;
+    transition: all 0.3s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: $light-blue;
+    box-shadow: 0 0 0 2px rgba($light-blue, 0.2);
+  }
+
+  .p-input-icon-left i {
+    color: $dark-mode-body-text; // Using a neutral grey for icon
+    left: 0.75rem;
+  }
+
+  /* Paginator styling */
+  .p-paginator {
+    background: transparent;
+    border: none;
+    padding: 1rem 0;
+    color: $tessi-blue;
+    font-weight: 600;
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: $light-blue;
+    color: white;
+    border-radius: $border-radius-sm;
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
+    background: rgba($light-blue, 0.1);
+    color: $light-blue;
+  }
+
+  /* === EMPTY STATE === */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: $tessi-blue;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: $border-radius-xl;
+    margin: 1rem;
+    position: relative;
+    box-shadow: $shadow-md;
+  }
+
+  .empty-state .empty-icon {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+    color: $light-blue; /* Tessi blue for icon */
+  }
+
+  .empty-state .empty-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $tessi-blue;
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-state .empty-message {
+    font-size: 1rem;
+    color: $dark-mode-body-text; // Using a neutral grey for body text
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-state .empty-action-btn {
+    @include tessi-gradient-bg; /* Tessi gradient for empty state button */
+    color: white !important;
+    font-weight: 700;
+    padding: 0.8rem 1.5rem;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba($pink, 0.3);
+  }
+
+  .empty-state .empty-action-btn:hover {
+    background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+    transform: translateY(-2px);
+  }
+
+  /* === LOADING STATE === */
+  .p-datatable-loading-overlay {
+    background: rgba(255, 255, 255, 0.8); /* Lighter overlay */
+    backdrop-filter: blur(5px);
+    border-radius: $border-radius-xl;
+  }
+
+  .p-datatable-loading-icon {
+    color: $light-blue; /* Tessi blue for loading icon */
+    font-size: 2.5rem;
+  }
+
+  /* === TOAST NOTIFICATIONS === */
+  .p-toast .p-toast-message {
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-xl;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-success {
+    background: linear-gradient(135deg, $alert-success, darken($alert-success, 10%));
+    color: white;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-error {
+    background: linear-gradient(135deg, $alert-error, darken($alert-error, 10%));
+    color: white;
+  }
+
+  .p-toast .p-toast-message.p-toast-message-info {
+    background: linear-gradient(135deg, $light-blue, darken($light-blue, 10%));
+    color: white;
+  }
+
+  /* === CONFIRM DIALOG === */
+  .p-dialog {
+    border-radius: $border-radius-2xl;
+    box-shadow: 0 25px 70px rgba($tessi-blue, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .p-dialog .p-dialog-header {
+    background: $tessi-blue; /* Primary Tessi blue for dialog header */
+    color: white;
+    border-radius: $border-radius-2xl $border-radius-2xl 0 0;
+    padding: 1.5rem 2rem;
+    font-weight: 700;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: $tessi-blue;
+  }
+
+  .p-dialog .p-dialog-footer {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem 2rem;
+    border-radius: 0 0 $border-radius-2xl $border-radius-2xl;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  .p-dialog .p-button {
+    background: $light-blue !important;
+    color: white !important;
+  }
+
+  .p-dialog .p-button.p-button-text {
+    background: transparent !important;
+    color: $tessi-blue !important;
+    box-shadow: none !important;
+  }
+
+  .p-dialog .p-button.p-button-text:hover {
+    background: rgba($tessi-blue, 0.05) !important;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes floatOblique1 {
+    0% {
+      transform: translateX(-100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes floatOblique2 {
+    0% {
+      transform: translateX(100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(-100vw - 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  /* === RESPONSIVE DESIGN === */
+  @media (max-width: 1200px) {
+    .user-list-container {
+      padding: 1.5rem;
+    }
+
+    .list-header {
+      padding: 2rem;
+    }
+
+    .list-header h2 {
+      font-size: 2rem;
+    }
+
+    .add-user-button.p-button {
+      min-width: 180px;
+      height: 3.2rem;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .user-list-container {
+      padding: 1rem;
+    }
+
+    .list-header {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 1.5rem;
+    }
+
+    .list-header h2 {
+      font-size: 1.75rem;
+      text-align: center;
+    }
+
+    .add-user-button.p-button {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.9rem;
+      padding: 1rem 1.5rem;
+      min-width: auto;
+      height: 3rem;
+    }
+
+    .table-container {
+      padding: 1rem;
+    }
+
+    .p-datatable .p-datatable-thead > tr th,
+    .p-datatable .p-datatable-tbody > tr td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .action-buttons {
+      gap: 0.5rem;
+    }
+
+    .action-buttons .p-button {
+      height: 2.2rem !important;
+      width: 2.2rem !important;
+      min-width: 2.2rem !important;
+
+      .pi {
+        font-size: 0.9rem !important;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .list-header h2::before {
+      font-size: 1.5rem;
+    }
+
+    .p-datatable .p-datatable-thead > tr th,
+    .p-datatable .p-datatable-tbody > tr td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .action-buttons {
+      gap: 0.3rem;
+    }
+
+    .action-buttons .p-button {
+      height: 2rem !important;
+      width: 2rem !important;
+      min-width: 2rem !important;
+
+      .pi {
+        font-size: 0.8rem !important;
+      }
+    }
+  }
+
+  /* === ACCESSIBILITY === */
+  .p-button:focus-visible {
+    outline: 3px solid $light-blue !important; /* Use Tessi blue for focus */
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

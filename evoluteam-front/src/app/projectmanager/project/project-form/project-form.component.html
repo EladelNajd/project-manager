@@ -1,0 +1,26 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input id="title" type="text" class="form-control" formControlName="title" />
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" class="form-control" formControlName="description"></textarea>
+  </div>
+
+<div class="mb-3">
+  <label for="teamId" class="form-label">Team</label>
+  <select id="teamId" class="form-select" formControlName="teamId">
+    <option [value]="null">No Team</option>
+    <option *ngFor="let team of teams" [value]="team.id">
+      {{ team.name || 'Unnamed Team' }}
+    </option>
+  </select>
+</div>
+
+
+  <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">
+    {{ isEditMode ? 'Update Project' : 'Create Project' }}
+  </button>
+</form>

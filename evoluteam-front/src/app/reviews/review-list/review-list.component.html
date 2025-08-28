@@ -1,0 +1,39 @@
+<h2>All Reviews</h2>
+
+<p-button label="Add Review" icon="pi pi-plus" (click)="openDialog()" class="p-mb-3"></p-button>
+
+<p-dialog header="Submit a Review" [(visible)]="displayDialog" [modal]="true" [style]="{ width: '30rem' }" (onHide)="closeDialog()">
+  <app-review-form (formClosed)="onFormClosed($event)"></app-review-form>
+</p-dialog>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Reviewee</th>
+      <th>Reviewer</th>
+      <th>Content</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of reviews">
+      <td>{{ review.id }}</td>
+      <td>{{ review.user?.name }}</td>
+      <td>{{ review.reviewer?.name }}</td>
+      <td>{{ review.content }}</td>
+      <td>{{ review.date | date:'short' }}</td>
+      <td>
+        <p-button 
+          icon="pi pi-trash" 
+          class="p-button-danger p-button-rounded p-button-sm" 
+          (click)="deleteReview(review.id!)"
+          tooltip="Delete"
+          tooltipPosition="top"
+          
+        > <i class="fa-solid fa-trash-can"></i></p-button>
+      </td>
+    </tr>
+  </tbody>
+</table>

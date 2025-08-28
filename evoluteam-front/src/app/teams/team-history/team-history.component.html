@@ -1,0 +1,59 @@
+<div class="team-history">
+  <h3>Team History</h3>
+
+  <div class="create-history">
+    <textarea
+      [(ngModel)]="newChange"
+      placeholder="Describe the event or change (e.g., 'Sprint planning completed')"
+      rows="3"
+      maxlength="250"
+      required
+    ></textarea>
+
+    <p-calendar
+      [(ngModel)]="newDate"
+      placeholder="Pick a date (optional)"
+      [showTime]="true"
+      dateFormat="yy-mm-dd"
+      hourFormat="24"
+    ></p-calendar>
+
+    <div class="team-selection">
+      <label for="teamSelect">Select Team:</label>
+      <select id="teamSelect" [(ngModel)]="selectedTeamId" required>
+        <option value="" disabled>Select a team</option>
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+      </select>
+    </div>
+
+    <button (click)="createHistory()" [disabled]="!newChange.trim() || !selectedTeamId">
+      <i class="pi pi-plus"></i> Add History
+    </button>
+  </div>
+  <ul *ngIf="history.length; else noHistory">
+    <li *ngFor="let item of history">
+        <strong>{{ item.event }}</strong>
+        <span class="team-name"> (Team: {{ item.teamName }})</span> <!-- Display team name -->
+        <span class="date">{{ item.date | date: 'short' }}</span>
+        <button (click)="deleteHistory(item.id!)" class="delete-button">
+            <i class="pi pi-trash"></i> Delete
+        </button>
+    </li>
+</ul>
+
+
+  <ul *ngIf="history.length; else noHistory">
+    <li *ngFor="let item of history">
+      <strong>{{ item.event }}</strong>
+      <span class="date">{{ item.date | date: 'short' }}</span>
+      <button (click)="deleteHistory(item.id!)" class="delete-button">
+        <i class="pi pi-trash"></i> Delete
+      </button>
+    </li>
+  </ul>
+
+
+  <ng-template #noHistory>
+    <p class="no-history">No history available.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,10 @@
+<h3>Add Skill</h3>
+<form [formGroup]="skillForm" (ngSubmit)="submit()">
+  <div>
+    <input formControlName="name" placeholder="Skill Name" class="form-control" />
+    <div *ngIf="skillForm.controls['name'].invalid && skillForm.controls['name'].touched" class="text-danger">
+      Skill name is required.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mt-2" [disabled]="skillForm.invalid">Add</button>
+</form>

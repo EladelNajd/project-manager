@@ -1,0 +1,15 @@
+<p-toast></p-toast>
+
+<div *ngIf="loading">Loading user details...</div>
+
+<div *ngIf="user && !loading" class="user-detail-container">
+  <h2>{{ user.name }}</h2>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Role:</strong> {{ user.role }}</p>
+  <p><strong>Profile Info:</strong></p>
+  <p>{{ user.profileInfo || '-' }}</p>
+  <p><strong>Team ID:</strong> {{ user.team?.id || '-' }}</p>
+  <p><strong>Points:</strong> {{ user.points || 0 }}</p>
+
+  <button pButton label="Back to list" (click)="goBack()"></button>
+</div>

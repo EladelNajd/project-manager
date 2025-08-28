@@ -1,0 +1,113 @@
+<!-- Toast Messages -->
+<p-toast></p-toast>
+<br>
+<!-- Add Request Button -->
+<div class="tessi-add-button">
+  <p-button
+    label="Add Request"
+    icon="pi pi-plus"
+    (click)="openNew()"
+    class="p-mb-3">
+  </p-button>
+</div>
+<br>
+
+<!-- Requests Table -->
+<div class="tessi-table">
+  <p-table
+    [value]="requests"
+    [paginator]="true"
+    [rows]="10"
+    [responsiveLayout]="'scroll'"
+    [loading]="loading"
+    dataKey="id">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th>User</th>
+        <th>Skill</th>
+        <th>Status</th>
+        <th>Points</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-request>
+      <tr>
+        <td>{{ request.userName }}</td>
+        <td>{{ request.skillName }}</td>
+        <td>
+          <span 
+            class="status-badge"
+            [ngClass]="{
+              'pending': request.status === 'pending',
+              'approved': request.status === 'approved',
+              'rejected': request.status === 'rejected'
+            }">
+            {{ request.status }}
+          </span>
+        </td>
+        <td>
+          <strong>{{ request.pointsAwarded ?? 0 }}</strong>
+          <small *ngIf="request.pointsAwarded > 0" class="tessi-gradient-text"> pts</small>
+        </td>
+        <td class="tessi-action-buttons">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-text p-button-sm"
+            (click)="editRequest(request)"
+            type="button"
+            aria-label="Edit"
+            pTooltip="Edit Request"
+            tooltipPosition="top">
+            <i class="fa-solid fa-pencil-alt"></i>
+          </button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger p-button-text p-button-sm"
+            (click)="deleteRequest(request.id)"
+            type="button"
+            aria-label="Delete"
+            pTooltip="Delete Request"
+            tooltipPosition="top">
+             <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    
+    <!-- Loading Template -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="text-center">
+          <div class="p-4">
+            <i class="pi pi-info-circle tessi-gradient-text" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0">No skill requests found</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Dialog for Add/Edit Request -->
+<div class="tessi-dialog">
+  <p-dialog
+    header="{{ isEditMode ? 'Edit Skill Request' : 'New Skill Request' }}"
+    [(visible)]="displayDialog"
+    [modal]="true"
+    [closable]="true"
+    [responsive]="true"
+    [style]="{ width: '500px' }"
+    (onHide)="onDialogCancel()">
+    
+    <app-skill-request-form
+      [existingRequest]="selectedRequest"
+      [editing]="isEditMode"
+      (save)="onDialogSave($event)"
+      (cancel)="onDialogCancel()">
+    </app-skill-request-form>
+  </p-dialog>
+</div>

@@ -1,0 +1,125 @@
+<div class="team-list-container">
+  <div class="header-bar">
+    <h2> Team List</h2>
+    <button
+      pButton
+      type="button"
+      label="+ Add Team"
+      icon="pi pi-plus"
+      class="add-team-button p-button"
+      (click)="openCreateDialog()"
+    ></button>
+  </div>
+
+  <div class="table-wrapper">
+    <p-table
+      [value]="teams"
+      [paginator]="true"
+      [rows]="5"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 25%">Name</th>
+          <th style="width: 50%">Description</th>
+          <th style="width: 25%">Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-team>
+        <tr>
+          <td>
+            <div class="team-info">
+              <i class="pi pi-users"></i>
+              {{ team.name }}
+            </div>
+          </td>
+          <td>
+            <div class="description-cell">
+              <i class="pi pi-info-circle"></i>
+              {{ team.description }}
+            </div>
+          </td>
+          <td class="action-buttons">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              class="edit-btn"
+              (click)="openEditDialog(team)"
+              pTooltip="Edit"
+              tooltipPosition="top"
+            >
+              <i class="fa-solid fa-pencil-alt"></i>
+            </button>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              class="delete-btn"
+              (click)="deleteTeam(team.id!)"
+              pTooltip="Delete"
+              tooltipPosition="top"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog
+  header="{{ editing ? '✏️ Edit Team' : '➕ Create Team' }}"
+  [(visible)]="teamDialogVisible"
+  [modal]="true"
+  [style]="{ width: '450px' }"
+  [closable]="false"
+  [responsive]="true"
+  class="team-dialog"
+>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="team-form">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" pInputText />
+        <small
+          *ngIf="form.get('name')?.invalid && form.get('name')?.touched"
+          class="p-error"
+        >
+          Name is required.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          pInputTextarea
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-secondary"
+        (click)="closeDialog()"
+      ></button>
+      <button
+        pButton
+        type="submit"
+        label="{{ editing ? 'Update' : 'Create' }}"
+        icon="pi pi-check"
+        class="p-button-success"
+        [disabled]="form.invalid"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

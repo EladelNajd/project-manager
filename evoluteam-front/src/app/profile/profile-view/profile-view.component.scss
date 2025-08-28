@@ -1,0 +1,355 @@
+// Tessi Light Mode Profile Component Styles
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// Tessi Color Variables
+$tessi-blue: #1a214d;
+$tessi-deep-blue: #005faa;
+$tessi-light-blue: #0072bb;
+$tessi-violet: #954b97;
+$tessi-rose: #ec5f6c;
+$tessi-pink: #ea527e;
+$background-light: #f2f2f2;
+$white: #ffffff;
+
+// Tessi Gradient
+$tessi-gradient: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+
+// Alert Colors (sparingly used)
+$success-green: #6eb643;
+$warning-yellow: #fcbe0e;
+$error-red: #d61b3c;
+
+// Typography
+$font-primary: 'Montserrat', Arial, sans-serif;
+
+// Page Background & Layout
+body {
+  background: $background-light;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-primary;
+}
+
+// Container for centering components
+.profile-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// Profile Component Styles
+.profile-details {
+  background: $white;
+  border-radius: 12px;
+  border: 2px solid rgba(26, 33, 77, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(26, 33, 77, 0.08);
+  position: relative;
+  overflow: hidden;
+  font-family: $font-primary;
+  
+  // Tessi oblique accent
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 4px;
+    background: $tessi-gradient;
+    transform: rotate(33deg);
+    transform-origin: right top;
+  }
+
+  h2 {
+    color: $tessi-blue;
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: $tessi-gradient;
+      border-radius: 2px;
+    }
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $tessi-blue;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateX(8px);
+      color: $tessi-light-blue;
+    }
+
+    strong {
+      font-weight: 600;
+      color: $tessi-blue;
+      margin-right: 0.5rem;
+      position: relative;
+      
+      &::after {
+        content: '💎';
+        margin-left: 8px;
+        font-size: 0.8em;
+        opacity: 0.7;
+      }
+    }
+    
+    &:nth-child(1) strong::after { content: '👤'; }
+    &:nth-child(2) strong::after { content: '📧'; }
+    &:nth-child(3) strong::after { content: '🏆'; }
+    &:nth-child(4) strong::after { content: '⭐'; }
+    &:nth-child(5) strong::after { content: '📝'; }
+  }
+}
+
+// Edit Form Styles
+.edit-form {
+  background: $white;
+  border-radius: 12px;
+  border: 2px solid rgba(26, 33, 77, 0.1);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(26, 33, 77, 0.08);
+  position: relative;
+  overflow: hidden;
+  font-family: $font-primary;
+  
+  // Animated oblique elements
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background: $tessi-gradient;
+    transform: rotate(33deg);
+    animation: oblique-float 4s ease-in-out infinite;
+  }
+  
+  &::before {
+    top: 20px;
+    right: 30px;
+    animation-delay: 0s;
+  }
+  
+  &::after {
+    bottom: 20px;
+    left: 30px;
+    animation-delay: 2s;
+  }
+
+  h2 {
+    color: $tessi-blue;
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    background: $tessi-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 1.5rem;
+    color: $tessi-blue;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    
+    &::before {
+      content: '✨';
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+      left: -20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      margin-top: 8px;
+      border: 2px solid rgba(26, 33, 77, 0.1);
+      border-radius: 8px;
+      font-family: $font-primary;
+      font-size: 1rem;
+      background: rgba(242, 242, 242, 0.3);
+      transition: all 0.3s ease;
+      color: $tessi-blue;
+      
+      &:focus {
+        outline: none;
+        border-color: $tessi-light-blue;
+        background: $white;
+        box-shadow: 0 0 0 4px rgba(0, 114, 187, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      &:hover {
+        border-color: $tessi-pink;
+        background: $white;
+      }
+      
+      &::placeholder {
+        color: rgba(26, 33, 77, 0.5);
+      }
+    }
+  }
+
+  button[type="submit"] {
+    background: $tessi-gradient;
+    color: $white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 25px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(26, 33, 77, 0.3);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+    
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(26, 33, 77, 0.2);
+    }
+    
+    &::after {
+      content: '💾';
+      margin-left: 8px;
+      font-size: 0.9em;
+    }
+  }
+}
+
+// Toast Component Styling Override
+::ng-deep .p-toast {
+  .p-toast-message {
+    background: $white;
+    border-left: 4px solid $success-green;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(26, 33, 77, 0.15);
+    
+    &.p-toast-message-success {
+      border-left-color: $success-green;
+      
+      .p-toast-message-icon {
+        color: $success-green;
+      }
+    }
+    
+    &.p-toast-message-warn {
+      border-left-color: $warning-yellow;
+      
+      .p-toast-message-icon {
+        color: $warning-yellow;
+      }
+    }
+    
+    &.p-toast-message-error {
+      border-left-color: $error-red;
+      
+      .p-toast-message-icon {
+        color: $error-red;
+      }
+    }
+    
+    .p-toast-message-text {
+      color: $tessi-blue;
+      font-family: $font-primary;
+      font-weight: 500;
+    }
+  }
+}
+
+// Animations
+@keyframes oblique-float {
+  0%, 100% {
+    transform: rotate(33deg) translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(33deg) translateY(-5px);
+    opacity: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .profile-container {
+    max-width: 100%;
+    gap: 1.5rem;
+  }
+  
+  .profile-details,
+  .edit-form {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .profile-details h2,
+  .edit-form h2 {
+    font-size: 1.5rem;
+  }
+  
+  .edit-form button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+  }
+}

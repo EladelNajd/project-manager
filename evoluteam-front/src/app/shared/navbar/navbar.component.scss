@@ -1,0 +1,339 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// Tessi Brand Colors
+$tessi-blue: #1a214d;
+$tessi-deep-blue: #005faa;
+$tessi-light-blue: #0072bb;
+$tessi-violet: #954b97;
+$tessi-rose: #ec5f6c;
+$tessi-pink: #ea527e;
+$tessi-salmon: #f08590;
+
+// Tessi Gradient (33° angle, left to right)
+$tessi-gradient: linear-gradient(33deg, #005faa 0%, #0072bb 25%, #954b97 50%, #ea527e 75%, #f08590 100%);
+
+// Dark mode text colors
+$tessi-title-text: #e0e0e0;
+$tessi-body-text: #a0a09f;
+$tessi-disabled-text: #6d6d6d;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // Ensure all items are vertically centered
+  background: $tessi-blue; // Primary Tessi blue background
+  color: white;
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 0;
+  font-family: 'Montserrat', Arial, sans-serif; // Tessi primary font
+
+  &__logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center; // Center logo and text vertically
+    gap: 1rem;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .tessi-logo {
+      height: 40px; // Minimum logo height per Tessi guidelines
+      width: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+
+      &:hover {
+        filter: brightness(1.1);
+      }
+
+      @media (max-width: 768px) {
+        height: 32px; // Smaller on mobile but still respects minimum
+      }
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700; // Bold weight for brand presence
+      color: white;
+
+      .highlight {
+        background: $tessi-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        font-weight: 900; // Black weight for emphasis
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  &__toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $tessi-salmon;
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  &__links {
+    list-style: none;
+    display: flex;
+    align-items: center; // Align links vertically
+    gap: 1.5rem;
+
+    li {
+      display: flex; // Ensure each list item is a flex container
+      align-items: center; // Center the link text vertically
+
+      a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600; // SemiBold for navigation links
+        position: relative;
+        transition: all 0.3s ease;
+        font-family: 'Montserrat', Arial, sans-serif;
+        padding: 0.5rem 0;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          width: 0;
+          height: 2px;
+          background: $tessi-gradient; // Use Tessi gradient for underline
+          transition: width 0.3s ease;
+          transform: skewX(-33deg); // 33° oblique angle per Tessi guidelines
+        }
+
+        &:hover {
+          color: $tessi-salmon; // Hover to salmon pink from gradient
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+
+        &.logout {
+          color: $tessi-rose; // Use Tessi rose for logout
+
+          &:hover {
+            color: $tessi-pink;
+          }
+
+          &::after {
+            background: $tessi-rose; // Single color for logout underline
+            transform: skewX(-33deg);
+          }
+        }
+
+        &.login {
+          background: $tessi-gradient;
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          color: white;
+          font-weight: 700;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+
+          &::after {
+            display: none; // Remove underline for button-style login
+          }
+        }
+      }
+    }
+
+    // Profile dropdown styling
+    .profile-menu {
+      position: relative;
+
+      > a {
+        display: flex;
+        align-items: center; // Center profile link vertically
+        gap: 0.5rem;
+      }
+
+      .dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(26, 33, 77, 0.2); // Shadow using tessi blue
+        min-width: 180px;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        border: 1px solid rgba(26, 33, 77, 0.1);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -8px;
+          right: 20px;
+          width: 0;
+          height: 0;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid white;
+        }
+
+        li {
+          margin: 0;
+
+          a {
+            color: $tessi-blue;
+            padding: 0.75rem 1rem;
+            display: block;
+            font-weight: 400;
+            border-radius: 0;
+
+            &:hover {
+              background: linear-gradient(90deg, rgba(236, 95, 108, 0.1) 0%, rgba(240, 133, 144, 0.1) 100%);
+              color: $tessi-rose;
+            }
+
+            &::after {
+              display: none; // Remove underline in dropdown
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: $tessi-blue;
+      width: 100%;
+      display: none;
+      padding: 1rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      &.open {
+        display: flex;
+      }
+
+      li {
+        text-align: center;
+        margin: 0.25rem 0;
+
+        a {
+          padding: 0.75rem 1rem;
+          display: block;
+        }
+      }
+.profile-menu-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  &:hover .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0); // animate from offset
+  }
+}
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  > a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(26, 33, 77, 0.2);
+    min-width: 180px;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(26, 33, 77, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    transform: translateY(-10px); // smooth drop animation
+    z-index: 999;
+
+    &.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+    // Move triangle inside
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 20px;
+      transform: translateY(-100%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid white;
+    }
+
+    li {
+      margin: 0;
+
+      a {
+        color: $tessi-blue;
+        padding: 0.75rem 1rem;
+        display: block;
+        font-weight: 400;
+
+        &:hover {
+          background: linear-gradient(90deg, rgba(236, 95, 108, 0.1), rgba(240, 133, 144, 0.1));
+          color: $tessi-rose;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+
+    }
+  }
+}

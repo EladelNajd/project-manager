@@ -1,0 +1,98 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="p-fluid p-formgrid p-grid">
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="title">Title *</label>
+      <input id="title" type="text" pInputText formControlName="title" />
+      <small *ngIf="hasFieldError('title')" class="p-error">
+        {{ getFieldErrorMessage('title') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="description">Description *</label>
+      <textarea id="description" pInputTextarea formControlName="description"></textarea>
+      <small *ngIf="hasFieldError('description')" class="p-error">
+        {{ getFieldErrorMessage('description') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="dueDate">Due Date *</label>
+      <input id="dueDate" type="date" formControlName="dueDate" [attr.min]="todayStr" />
+      <small *ngIf="hasFieldError('dueDate')" class="p-error">
+        {{ getFieldErrorMessage('dueDate') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="status">Status *</label>
+      <p-dropdown
+        id="status"
+        [options]="statusOptions"
+        formControlName="status"
+        placeholder="Select status"
+        [showClear]="true"
+        appendTo="body"
+        aria-label="Status"
+      ></p-dropdown>
+      <small *ngIf="hasFieldError('status')" class="p-error">
+        {{ getFieldErrorMessage('status') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="assignedUser">Assigned User *</label>
+      <p-dropdown
+        id="assignedUser"
+        [options]="users"
+        formControlName="assignedUser"
+        placeholder="Select user"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        appendTo="body"
+        aria-label="Assigned User"
+      ></p-dropdown>
+      <small *ngIf="hasFieldError('assignedUser')" class="p-error">
+        {{ getFieldErrorMessage('assignedUser') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <label for="project">Project *</label>
+      <p-dropdown
+        id="project"
+        [options]="projects"
+        formControlName="project"
+        placeholder="Select project"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        appendTo="body"
+        aria-label="Project"
+      ></p-dropdown>
+      <small *ngIf="hasFieldError('project')" class="p-error">
+        {{ getFieldErrorMessage('project') }}
+      </small>
+    </div>
+
+    <div class="p-field p-col-12">
+      <button
+        pButton
+        type="submit"
+        [label]="task ? 'Update Task' : 'Create Task'"
+        [disabled]="isSubmitting"
+        icon="pi pi-check"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="p-button-secondary"
+        (click)="cancel()"
+      ></button>
+    </div>
+
+  </div>
+</form>

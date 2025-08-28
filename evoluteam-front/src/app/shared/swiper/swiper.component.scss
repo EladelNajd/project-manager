@@ -1,0 +1,61 @@
+.swiper-container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 64px); // Adjust this to match actual navbar height
+  overflow: hidden;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.swiper-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: calc(100vw * 3); // For 3 images
+}
+
+.swiper-images img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+  border: none;
+}
+
+.swiper-container::after {
+  content: '';
+  display: block;
+  height: 32px;
+  background-color: white;
+}
+
+/* Dots */
+.swiper-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.swiper-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #0b2545;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.swiper-dot.active {
+  background-color: #1976d2;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.7);
+}

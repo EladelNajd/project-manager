@@ -1,0 +1,689 @@
+// Use imported fonts and variables
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+$secondary-teal: #008faa;
+$secondary-blue: #0072bb;
+$secondary-purple: #954b97;
+$secondary-rose: #ea527e;
+$secondary-salmon: #f08590;
+
+$dark-mode-title-text: #e0e0e0;
+$dark-mode-body-text: #a0a09f;
+$dark-mode-disabled-text: #6d6d6d;
+
+$alert-success: #6eb563;
+$alert-warning: #fcbc0e;
+$alert-error: #d61b3c;
+
+$background-tessi-blue: #1a214d;
+$background-light-grey: #f2f2f2;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+$border-radius-sm: 0.375rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-2xl: 1.5rem;
+
+@mixin tessi-gradient-bg {
+  background: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $salmon 100%);
+}
+
+.skills-list-container {
+  padding: 2rem;
+  background-color: $background-light-grey;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+  position: relative;
+}
+
+/* Header bar */
+.header-bar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: $border-radius-2xl;
+  padding: 2.5rem 3rem;
+  margin-bottom: 2rem;
+  box-shadow: $shadow-xl;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  h2 {
+    color: $tessi-blue;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    &::before {
+      content: '📝';
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      @include tessi-gradient-bg;
+      border-radius: 2px;
+      transform: scaleX(0);
+      animation: slideIn 1s ease forwards 0.5s;
+    }
+  }
+}
+
+/* Action buttons in header */
+.action-buttons {
+  display: flex;
+  align-items: center;
+
+  .btn {
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+
+    &.add-skill-button {
+      @include tessi-gradient-bg;
+      color: white;
+      border: none;
+      box-shadow: 0 6px 15px rgba($pink, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &:hover {
+        background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue);
+        box-shadow: 0 12px 40px rgba($rose, 0.4);
+        transform: translateY(-3px) scale(1.02);
+      }
+
+      &:active {
+        transform: translateY(-1px) scale(1.01);
+      }
+    }
+
+    &.back-button {
+      background-color: $background-light-grey;
+      color: $tessi-blue;
+      border: 1px solid $tessi-blue;
+
+      &:hover {
+        background-color: $light-blue;
+        color: white;
+        border-color: $light-blue;
+      }
+    }
+  }
+}
+
+/* Skills list */
+.skills-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-item {
+  background-color: white;
+  border: 1px solid rgba($tessi-blue, 0.2);
+  margin-bottom: 10px;
+  padding: 1rem 1.5rem;
+  border-radius: $border-radius-md;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: $shadow-sm;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  .skill-name {
+    color: $tessi-blue;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  /* Skills list item action buttons */
+  .skill-actions {
+    display: flex;
+    align-items: center;
+
+    .btn {
+      margin-left: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      color: white;
+      border: none;
+      @include tessi-gradient-bg;
+      box-shadow: 0 6px 15px rgba($pink, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &:hover {
+        background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue);
+        box-shadow: 0 12px 40px rgba($rose, 0.5);
+        transform: translateY(-3px) scale(1.02);
+      }
+
+      &:active {
+        transform: translateY(-1px) scale(1.01);
+      }
+
+      &.delete-skill-btn {
+        background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue);
+        box-shadow: 0 6px 15px rgba($alert-error, 0.6);
+        color: white;
+
+        &:hover {
+          background: linear-gradient(33deg, darken($salmon, 10%), darken($pink, 10%), darken($violet, 10%), darken($light-blue, 10%), darken($deep-blue, 10%));
+          box-shadow: 0 12px 40px rgba($alert-error, 0.7);
+        }
+      }
+
+      &.edit-skill-btn {
+        background: linear-gradient(33deg, $light-blue 0%, $deep-blue 100%);
+        box-shadow: 0 6px 15px rgba($light-blue, 0.5);
+
+        &:hover {
+          background: linear-gradient(33deg, darken($light-blue, 10%), darken($deep-blue, 10%));
+          box-shadow: 0 12px 40px rgba($deep-blue, 0.6);
+        }
+      }
+    }
+  }
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: $border-radius-xl;
+  margin: 1rem;
+  box-shadow: $shadow-md;
+  color: $tessi-blue;
+
+  .empty-icon {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+    color: $light-blue;
+  }
+
+  .empty-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: $tessi-blue;
+  }
+
+  .empty-message {
+    font-size: 1rem;
+    color: $dark-mode-body-text;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ===== PRIMENG DIALOG CUSTOM STYLING ===== */
+/* Enhanced specificity and global targeting */
+
+/* Dialog container and backdrop - Global styles */
+:host ::ng-deep .p-dialog-mask,
+::ng-deep .p-dialog-mask,
+.p-dialog-mask {
+  background-color: rgba(26, 33, 77, 0.7) !important;
+  backdrop-filter: blur(8px) !important;
+  animation: fadeInBackdrop 0.3s ease-out forwards !important;
+  z-index: 1100 !important;
+}
+
+/* Main dialog styling - Enhanced targeting */
+:host ::ng-deep .p-dialog,
+::ng-deep .p-dialog,
+.p-dialog {
+  border-radius: $border-radius-2xl !important;
+  box-shadow: $shadow-xl, 0 0 60px rgba($violet, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  font-family: 'Montserrat', sans-serif !important;
+  overflow: hidden !important;
+  animation: slideInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+  transform: scale(0.8) translateY(-20px) !important;
+  opacity: 0 !important;
+  min-width: 400px !important;
+  max-width: 90vw !important;
+
+  /* Dialog header */
+  .p-dialog-header {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
+    border-bottom: 1px solid rgba($tessi-blue, 0.1) !important;
+    padding: 1.5rem 2rem !important;
+    border-radius: $border-radius-2xl $border-radius-2xl 0 0 !important;
+
+    .p-dialog-title {
+      color: $tessi-blue !important;
+      font-size: 1.5rem !important;
+      font-weight: 700 !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+      position: relative;
+      font-family: 'Montserrat', sans-serif !important;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        @include tessi-gradient-bg;
+        border-radius: 2px;
+        animation: slideIn 0.6s ease forwards 0.2s;
+        transform: scaleX(0);
+      }
+    }
+
+    .p-dialog-header-icon {
+      color: $tessi-blue !important;
+      font-size: 1.2rem !important;
+      transition: all 0.3s ease !important;
+      border-radius: 50% !important;
+      width: 32px !important;
+      height: 32px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      &:hover {
+        background-color: rgba($light-blue, 0.1) !important;
+        color: $light-blue !important;
+        transform: rotate(90deg) !important;
+      }
+    }
+
+    .p-dialog-header-icons {
+      .p-dialog-header-icon {
+        color: $tessi-blue !important;
+        font-size: 1.2rem !important;
+        transition: all 0.3s ease !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        &:hover {
+          background-color: rgba($light-blue, 0.1) !important;
+          color: $light-blue !important;
+          transform: rotate(90deg) !important;
+        }
+      }
+    }
+  }
+
+  /* Dialog content */
+  .p-dialog-content {
+    padding: 2rem !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+  }
+}
+
+/* Form styling within dialog - Enhanced specificity */
+:host ::ng-deep .p-dialog .form-group,
+::ng-deep .p-dialog .form-group,
+:host ::ng-deep .p-dialog-content .form-group,
+::ng-deep .p-dialog-content .form-group,
+:host ::ng-deep .p-dialog form > div,
+::ng-deep .p-dialog form > div,
+.p-dialog .form-group,
+.p-dialog-content .form-group {
+  margin-bottom: 1.5rem !important;
+
+  label {
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    color: $tessi-blue !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+}
+
+/* Form control styling with maximum specificity */
+:host ::ng-deep .p-dialog .form-control,
+::ng-deep .p-dialog .form-control,
+:host ::ng-deep .p-dialog-content .form-control,
+::ng-deep .p-dialog-content .form-control,
+:host ::ng-deep .p-dialog input.form-control,
+::ng-deep .p-dialog input.form-control,
+:host ::ng-deep .p-dialog input[formControlName],
+::ng-deep .p-dialog input[formControlName],
+:host ::ng-deep .p-dialog-content input,
+::ng-deep .p-dialog-content input,
+.p-dialog .form-control,
+.p-dialog-content .form-control,
+.p-dialog input {
+  width: 100% !important;
+  padding: 0.875rem 1rem !important;
+  border: 2px solid rgba($tessi-blue, 0.2) !important;
+  border-radius: $border-radius-md !important;
+  font-size: 1rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: $tessi-blue !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+  box-sizing: border-box !important;
+
+  &:focus {
+    outline: none !important;
+    border-color: $light-blue !important;
+    box-shadow: 0 0 0 3px rgba($light-blue, 0.1), 0 4px 12px rgba($light-blue, 0.2) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  &::placeholder {
+    color: $dark-mode-body-text !important;
+    opacity: 0.7 !important;
+  }
+
+  &.is-invalid {
+    border-color: $alert-error !important;
+    box-shadow: 0 0 0 3px rgba($alert-error, 0.1) !important;
+  }
+}
+
+/* Error message styling */
+:host ::ng-deep .p-dialog .text-danger,
+::ng-deep .p-dialog .text-danger,
+:host ::ng-deep .p-dialog-content .text-danger,
+::ng-deep .p-dialog-content .text-danger,
+.p-dialog .text-danger,
+.p-dialog-content .text-danger {
+  color: $alert-error !important;
+  font-size: 0.85rem !important;
+  margin-top: 0.5rem !important;
+  font-weight: 500 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Dialog action buttons - Enhanced targeting */
+:host ::ng-deep .p-dialog .d-flex,
+::ng-deep .p-dialog .d-flex,
+:host ::ng-deep .p-dialog-content .d-flex,
+::ng-deep .p-dialog-content .d-flex,
+.p-dialog .d-flex,
+.p-dialog-content .d-flex {
+  gap: 1rem !important;
+  margin-top: 2rem !important;
+  display: flex !important;
+
+  &.justify-content-end {
+    justify-content: flex-end !important;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border-radius: $border-radius-md !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border: none !important;
+    font-family: 'Montserrat', sans-serif !important;
+
+    &.btn-primary {
+      @include tessi-gradient-bg;
+      color: white !important;
+      box-shadow: 0 6px 20px rgba($pink, 0.4) !important;
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+        box-shadow: 0 12px 40px rgba($rose, 0.5) !important;
+        transform: translateY(-2px) scale(1.02) !important;
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(-1px) scale(1.01) !important;
+      }
+
+      &:disabled {
+        opacity: 0.6 !important;
+        cursor: not-allowed !important;
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba($pink, 0.2) !important;
+      }
+    }
+
+    &.btn-secondary {
+      background-color: rgba($background-light-grey, 0.8) !important;
+      color: $tessi-blue !important;
+      border: 1px solid rgba($tessi-blue, 0.3) !important;
+      backdrop-filter: blur(10px) !important;
+
+      &:hover {
+        background-color: rgba($tessi-blue, 0.1) !important;
+        border-color: $tessi-blue !important;
+        transform: translateY(-1px) !important;
+      }
+    }
+  }
+
+  /* PrimeNG specific button styling */
+  .p-button {
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border-radius: $border-radius-md !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border: none !important;
+    font-family: 'Montserrat', sans-serif !important;
+
+    &.p-button-primary {
+      @include tessi-gradient-bg;
+      color: white !important;
+      box-shadow: 0 6px 20px rgba($pink, 0.4) !important;
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+        box-shadow: 0 12px 40px rgba($rose, 0.5) !important;
+        transform: translateY(-2px) scale(1.02) !important;
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(-1px) scale(1.01) !important;
+      }
+
+      &:disabled {
+        opacity: 0.6 !important;
+        cursor: not-allowed !important;
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba($pink, 0.2) !important;
+      }
+    }
+
+    &.p-button-secondary {
+      background-color: rgba($background-light-grey, 0.8) !important;
+      color: $tessi-blue !important;
+      border: 1px solid rgba($tessi-blue, 0.3) !important;
+      backdrop-filter: blur(10px) !important;
+
+      &:hover {
+        background-color: rgba($tessi-blue, 0.1) !important;
+        border-color: $tessi-blue !important;
+        transform: translateY(-1px) !important;
+      }
+    }
+  }
+}
+
+/* Utility classes for dialog */
+:host ::ng-deep .p-dialog .mt-3,
+::ng-deep .p-dialog .mt-3,
+.p-dialog .mt-3 {
+  margin-top: 1rem !important;
+}
+
+:host ::ng-deep .p-dialog .me-2,
+::ng-deep .p-dialog .me-2,
+.p-dialog .me-2 {
+  margin-right: 0.5rem !important;
+}
+
+:host ::ng-deep .p-dialog .mt-2,
+::ng-deep .p-dialog .mt-2,
+.p-dialog .mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+/* Additional form styling for standalone forms */
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $tessi-blue;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid rgba($tessi-blue, 0.2);
+    border-radius: $border-radius-md;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: $tessi-blue;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: $light-blue;
+      box-shadow: 0 0 0 3px rgba($light-blue, 0.1), 0 4px 12px rgba($light-blue, 0.2);
+      background-color: rgba(255, 255, 255, 0.95);
+      transform: translateY(-1px);
+    }
+
+    &::placeholder {
+      color: $dark-mode-body-text;
+      opacity: 0.7;
+    }
+
+    &.is-invalid {
+      border-color: $alert-error;
+      box-shadow: 0 0 0 3px rgba($alert-error, 0.1);
+    }
+  }
+
+  .text-danger {
+    color: $alert-error;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Utility animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInScale {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

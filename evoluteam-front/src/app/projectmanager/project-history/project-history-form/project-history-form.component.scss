@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// === TESSI SCSS VARIABLES ===
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$salmon: #f08590;
+
+$secondary-teal: #008faa;
+$secondary-blue: #0072bb;
+$secondary-purple: #954b97;
+$secondary-rose: #ea527e;
+$secondary-salmon: #f08590;
+
+$dark-mode-title-text: #e0e0e0;
+$dark-mode-body-text: #a0a09f;
+$dark-mode-disabled-text: #6d6d6d;
+
+$alert-success: #6eb563;
+$alert-warning: #fcbc0e;
+$alert-error: #d61b3c;
+
+$background-tessi-blue: #1a214d;
+$background-light-grey: #f2f2f2;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+$border-radius-sm: 0.375rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-2xl: 1.5rem;
+
+@mixin tessi-gradient-bg {
+  background: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $salmon 100%);
+}
+
+:host ::ng-deep {
+  /* === MAIN CONTAINER === */
+  .project-history-container {
+    min-height: 100vh;
+    background: $background-light-grey;
+    padding: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .project-history-container::before,
+  .project-history-container::after {
+    content: '';
+    position: absolute;
+    @include tessi-gradient-bg;
+    opacity: 0.15;
+    transform: skewX(-33deg);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .project-history-container::before {
+    width: 300px;
+    height: 6px;
+    top: 5%;
+    left: -10%;
+    animation: floatOblique1 20s linear infinite;
+  }
+
+  .project-history-container::after {
+    width: 200px;
+    height: 4px;
+    bottom: 10%;
+    right: -5%;
+    animation: floatOblique2 25s linear infinite reverse;
+  }
+
+  /* === CARD STYLING === */
+  .card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(15px);
+    border-radius: $border-radius-2xl !important;
+    padding: 2.5rem !important;
+    box-shadow: $shadow-xl !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    @include tessi-gradient-bg;
+    background-size: 200% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* === HEADER STYLING === */
+  .card h2 {
+    color: $tessi-blue !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin: 0 0 2rem 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    position: relative;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .card h2::before {
+    content: '📝';
+    font-size: 1.75rem;
+    animation: bounce 2s infinite;
+  }
+
+  .card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    @include tessi-gradient-bg;
+    border-radius: 2px;
+    transform: scaleX(0);
+    animation: slideIn 1s ease forwards 0.5s;
+  }
+
+  /* === FORM STYLING === */
+  .form-label {
+    display: block !important;
+    color: $tessi-blue !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    position: relative !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .form-label::before {
+    content: '🏗️';
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .form-label[for="event"]::before {
+    content: '📋';
+  }
+
+  .form-label[for="date"]::before {
+    content: '📅';
+  }
+
+  /* === INPUT STYLING === */
+  .form-control,
+  .form-select {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem !important;
+    padding: 1rem 1.25rem !important;
+    border: 2px solid rgba($tessi-blue, 0.2) !important;
+    border-radius: $border-radius-lg !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: $tessi-blue !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(5px) !important;
+    position: relative;
+    width: 100% !important;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: $light-blue !important;
+    box-shadow: 0 0 0 3px rgba($light-blue, 0.15) !important;
+    background: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-1px);
+    outline: none !important;
+  }
+
+  .form-control:hover:not(:focus),
+  .form-select:hover:not(:focus) {
+    border-color: rgba($tessi-blue, 0.4) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* === ERROR STYLING === */
+  .text-danger {
+    color: $alert-error !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    margin-top: 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .text-danger::before {
+    content: '⚠️';
+    font-size: 0.9rem;
+  }
+
+  /* === BUTTON STYLING === */
+  .btn {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.875rem 2rem !important;
+    border-radius: $border-radius-lg !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    min-width: 120px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    border: none !important;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    @include tessi-gradient-bg;
+    color: white !important;
+    box-shadow: 0 6px 20px rgba($pink, 0.4) !important;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(33deg, $salmon, $pink, $violet, $light-blue, $deep-blue) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 12px 40px rgba($rose, 0.5) !important;
+  }
+
+  .btn-primary:hover:not(:disabled)::before {
+    left: 100%;
+  }
+
+  .btn-primary:active {
+    transform: translateY(-1px) scale(1.01) !important;
+  }
+
+  .btn-primary:disabled {
+    background: rgba($dark-mode-disabled-text, 0.3) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    background: rgba($tessi-blue, 0.1) !important;
+    border: 2px solid rgba($tessi-blue, 0.2) !important;
+    color: $tessi-blue !important;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: rgba($tessi-blue, 0.15) !important;
+    border-color: rgba($tessi-blue, 0.3) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba($tessi-blue, 0.2) !important;
+  }
+
+  .btn-secondary:active {
+    transform: translateY(-1px) !important;
+  }
+
+  /* === MARGIN/SPACING === */
+  .mb-3 {
+    margin-bottom: 2rem !important;
+  }
+
+  .ms-2 {
+    margin-left: 1rem !important;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes floatOblique1 {
+    0% {
+      transform: translateX(-100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes floatOblique2 {
+    0% {
+      transform: translateX(100%) skewX(-33deg);
+    }
+    100% {
+      transform: translateX(calc(-100vw - 100%)) skewX(-33deg);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* === RESPONSIVE DESIGN === */
+  @media (max-width: 768px) {
+    .project-history-container {
+      padding: 1rem;
+    }
+
+    .card {
+      padding: 1.5rem !important;
+    }
+
+    .card h2 {
+      font-size: 1.75rem !important;
+      text-align: center;
+    }
+
+    .form-control,
+    .form-select {
+      padding: 0.875rem 1rem !important;
+      font-size: 0.9rem !important;
+    }
+
+    .btn {
+      width: 100% !important;
+      margin-bottom: 0.5rem !important;
+    }
+
+    .ms-2 {
+      margin-left: 0 !important;
+    }
+  }
+
+  /* === ACCESSIBILITY === */
+  .btn:focus-visible {
+    outline: 3px solid $light-blue !important;
+    outline-offset: 2px;
+  }
+
+  .form-control:focus-visible,
+  .form-select:focus-visible {
+    outline: 3px solid $light-blue !important;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

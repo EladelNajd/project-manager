@@ -1,0 +1,422 @@
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+// ================================
+// TESSI DESIGN SYSTEM VARIABLES
+// ================================
+
+// Primary Colors
+$tessi-blue: #1a214d;
+$deep-blue: #005faa;
+$light-blue: #0072bb;
+$violet: #954b97;
+$rose: #ec5f6c;
+$pink: #ea527e;
+$coral: #f08590;
+
+// Secondary Colors
+$teal: #008faa;
+
+// Background Colors
+$bg-primary: #f2f2f2;
+$bg-white: #ffffff;
+$bg-dark-primary: #0c0c0c;
+$bg-dark-secondary: #242426;
+
+// Text Colors
+$text-primary: $tessi-blue;
+$text-light: #a0a0a0;
+$text-white: #e0e0e0;
+$text-disabled: #6d6d6d;
+
+// Alert Colors
+$success-green: #6eb563;
+$warning-orange: #fcbc0e;
+$error-red: #d61b3c;
+
+// Tessi Gradient (33° angle)
+$tessi-gradient: linear-gradient(33deg, $deep-blue 0%, $light-blue 25%, $violet 50%, $pink 75%, $coral 100%);
+
+// Typography
+$font-primary: 'Montserrat', Arial, sans-serif;
+
+// Shadows & Effects
+$shadow-soft: 0 4px 12px rgba(26, 33, 77, 0.1);
+$shadow-medium: 0 6px 20px rgba(26, 33, 77, 0.15);
+$shadow-hover: 0 8px 25px rgba(26, 33, 77, 0.2);
+
+// Transitions
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.2s ease-in-out;
+
+// ================================
+// COMPONENT STYLES
+// ================================
+
+:host {
+  font-family: $font-primary;
+  color: $text-primary;
+  
+  // Main container
+  .review-list-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, $bg-white 0%, $bg-primary 100%);
+    min-height: 100vh;
+    position: relative;
+    
+    // Oblique decorative element (Tessi signature)
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: $tessi-gradient;
+      transform: skewY(-0.5deg);
+      z-index: 1;
+    }
+  }
+
+  // Header styling
+  h2 {
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: $tessi-blue;
+    margin-bottom: 2rem;
+    position: relative;
+    
+    // Gradient text effect
+    background: $tessi-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    // Animated underline
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: $tessi-gradient;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2px;
+    }
+    
+    &:hover::after {
+      width: 100px;
+    }
+  }
+
+  // Add Review Button Styling
+  ::ng-deep .p-button {
+    font-family: $font-primary !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 12px 24px !important;
+    border: none !important;
+    background: $tessi-gradient !important;
+    color: white !important;
+    box-shadow: $shadow-soft !important;
+    transition: $transition-smooth !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    
+    &:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: $shadow-hover !important;
+    }
+    
+    &:active {
+      transform: translateY(0) !important;
+    }
+    
+    .pi {
+      margin-right: 8px !important;
+    }
+  }
+
+  // Danger button specific styling
+  ::ng-deep .p-button-danger {
+    background: linear-gradient(45deg, $error-red, #ff4757) !important;
+    
+    &:hover {
+      background: linear-gradient(45deg, darken($error-red, 10%), #ff3742) !important;
+    }
+  }
+
+  // Dialog styling
+  ::ng-deep .p-dialog {
+    .p-dialog-header {
+      background: $tessi-gradient !important;
+      color: white !important;
+      border-radius: 12px 12px 0 0 !important;
+      font-family: $font-primary !important;
+      font-weight: 600 !important;
+    }
+    
+    .p-dialog-content {
+      padding: 2rem !important;
+      background: $bg-white !important;
+      border-radius: 0 0 12px 12px !important;
+    }
+    
+    .p-dialog-mask {
+      backdrop-filter: blur(8px) !important;
+      background: rgba(26, 33, 77, 0.3) !important;
+    }
+  }
+
+  // Table container with modern card design
+  .table-container {
+    background: $bg-white;
+    border-radius: 16px;
+    box-shadow: $shadow-medium;
+    overflow: hidden;
+    margin-top: 2rem;
+    position: relative;
+    
+    // Subtle gradient overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: $tessi-gradient;
+      z-index: 2;
+    }
+  }
+
+  // Table styling
+  .table {
+    margin: 0;
+    font-family: $font-primary;
+    
+    thead {
+      th {
+        background: $tessi-blue !important;
+        color: white !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 1.2rem 1rem !important;
+        border: none !important;
+        font-size: 0.875rem;
+        position: relative;
+        
+        // Subtle gradient overlay on headers
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+          pointer-events: none;
+        }
+      }
+    }
+    
+    tbody {
+      tr {
+        transition: $transition-fast;
+        border: none !important;
+        
+        &:nth-child(even) {
+          background-color: rgba(242, 242, 242, 0.3);
+        }
+        
+        &:hover {
+          background: linear-gradient(90deg, 
+            rgba(26, 33, 77, 0.05) 0%, 
+            rgba(0, 114, 187, 0.08) 50%, 
+            rgba(26, 33, 77, 0.05) 100%) !important;
+          transform: translateX(4px);
+          box-shadow: inset 4px 0 0 $light-blue;
+        }
+        
+        td {
+          padding: 1rem !important;
+          vertical-align: middle !important;
+          border: none !important;
+          font-weight: 400;
+          color: $text-primary;
+          
+          // ID column styling
+          &:first-child {
+            font-weight: 600;
+            color: $light-blue;
+            font-size: 0.9rem;
+          }
+          
+          // Name columns styling
+          &:nth-child(2), &:nth-child(3) {
+            font-weight: 500;
+            color: $tessi-blue;
+          }
+          
+          // Content column
+          &:nth-child(4) {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: $text-light;
+          }
+          
+          // Date column
+          &:nth-child(5) {
+            color: $violet;
+            font-weight: 500;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+
+  // Action buttons in table
+  ::ng-deep .p-button-sm {
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: $transition-smooth !important;
+    
+    &:hover {
+      transform: scale(1.1) rotate(5deg) !important;
+    }
+    
+    .pi {
+      margin: 0 !important;
+      font-size: 1rem !important;
+    }
+  }
+
+  // Loading state animation
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  // Empty state styling
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: $text-light;
+    
+    .empty-icon {
+      font-size: 4rem;
+      color: $violet;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    
+    .empty-text {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .empty-subtext {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    .review-list-container {
+      padding: 1rem;
+    }
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    
+    .table {
+      min-width: 600px;
+    }
+  }
+
+  // Dark mode support (optional)
+  @media (prefers-color-scheme: dark) {
+    .review-list-container {
+      background: linear-gradient(135deg, $bg-dark-primary 0%, $bg-dark-secondary 100%);
+    }
+    
+    .table-container {
+      background: $bg-dark-secondary;
+    }
+    
+    .table tbody tr {
+      &:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      td {
+        color: $text-white;
+        
+        &:nth-child(4) {
+          color: $text-light;
+        }
+      }
+    }
+  }
+
+  // Micro-animations for better UX
+  .fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Success/Error message styling
+  ::ng-deep .p-toast {
+    .p-toast-message {
+      border-radius: 12px !important;
+      box-shadow: $shadow-medium !important;
+      
+      &.p-toast-message-success {
+        background: linear-gradient(45deg, $success-green, lighten($success-green, 10%)) !important;
+      }
+      
+      &.p-toast-message-error {
+        background: linear-gradient(45deg, $error-red, lighten($error-red, 10%)) !important;
+      }
+    }
+  }
+}

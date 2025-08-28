@@ -1,0 +1,94 @@
+<form [formGroup]="skillRequestForm" (ngSubmit)="onSubmit()" class="p-fluid">
+  <div class="p-field">
+    <label for="user">User *</label>
+    <p-dropdown
+      id="user"
+      [options]="users"
+      optionLabel="name"
+      formControlName="user"
+      placeholder="Select User"
+      [showClear]="true"
+    ></p-dropdown>
+    <small
+      *ngIf="f['user'].invalid && f['user'].touched"
+      class="p-error"
+      >User is required.</small
+    >
+  </div>
+
+  <div class="p-field">
+    <label for="skill">Skill *</label>
+    <p-dropdown
+      id="skill"
+      [options]="skills"
+      optionLabel="name"
+      formControlName="skill"
+      placeholder="Select Skill"
+      [showClear]="true"
+    ></p-dropdown>
+    <small
+      *ngIf="f['skill'].invalid && f['skill'].touched"
+      class="p-error"
+      >Skill is required.</small
+    >
+  </div>
+
+  <div class="p-field">
+    <label for="status">Status *</label>
+    <p-dropdown
+      id="status"
+      [options]="statuses"
+      formControlName="status"
+      placeholder="Select Status"
+    ></p-dropdown>
+    <small
+      *ngIf="f['status'].invalid && f['status'].touched"
+      class="p-error"
+      >Status is required.</small
+    >
+  </div>
+
+  <div class="p-field">
+    <label for="pointsAwarded">Points Awarded *</label>
+    <input
+      id="pointsAwarded"
+      type="number"
+      pInputText
+      formControlName="pointsAwarded"
+      min="0"
+      placeholder="Points"
+    />
+    <small
+      *ngIf="f['pointsAwarded'].invalid && f['pointsAwarded'].touched"
+      class="p-error"
+      >Valid points required.</small
+    >
+  </div>
+
+  <div class="p-field">
+    <label for="reason">Reason</label>
+    <textarea
+      id="reason"
+      pInputTextarea
+      formControlName="reason"
+      rows="3"
+      placeholder="Optional reason..."
+    ></textarea>
+  </div>
+
+  <div class="p-dialog-footer">
+    <button
+      pButton
+      type="submit"
+      label="Save"
+      [disabled]="skillRequestForm.invalid"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Cancel"
+      class="p-button-secondary"
+      (click)="onCancel()"
+    ></button>
+  </div>
+</form>
